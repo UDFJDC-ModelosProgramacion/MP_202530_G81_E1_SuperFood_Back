@@ -6,10 +6,10 @@ import lombok.Data;
 @Entity
 @Data
 public class ServicioEntity  extends BaseEntity{
-    String nombre;
-    String descripcion;
-    Double costo;
-    String categoria;
+    private String nombre;
+    private String descripcion;
+    private Double costo;
+    private String categoria;
     
 
 }
