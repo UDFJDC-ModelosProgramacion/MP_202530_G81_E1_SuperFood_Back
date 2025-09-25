@@ -12,7 +12,7 @@ public class RecetaEntity  extends BaseEntity{
     String descripcion;
     Integer tiempoPreparacion;
     Integer porciones;
+
+    private ChefEntity chef;
     
-
-
 }
