@@ -5,6 +5,7 @@ import lombok.Data;
 
 @Data
 @Entity
-public class AficionadoEntity extends BaseEntity {
+public class ChefAficionadoEntity extends BaseEntity {
     private String descripcionExperiencia;
+    private String mejorPlatillo;
 }
