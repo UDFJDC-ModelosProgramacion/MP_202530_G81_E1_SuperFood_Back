@@ -1,13 +1,12 @@
 package co.edu.udistrital.mdp.back.entities;
-
 import jakarta.persistence.Entity;
 import lombok.Data;
 
-@Data
 @Entity
+@Data
 
-public class ChefEntity extends BaseEntity {
+
+public class UtensilioEntity extends BaseEntity{
     private String nombre;
-    private String email;
-  
+
 }

@@ -6,6 +6,6 @@ import lombok.Data;
 @Data
 @Entity
 
-public class Profesional extends BaseEntity {
+public class ProfesionalEntity extends BaseEntity {
     private boolean verificado;
 }
