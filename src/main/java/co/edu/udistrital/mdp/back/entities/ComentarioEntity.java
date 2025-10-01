@@ -3,7 +3,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
 import lombok.Data;
 import uk.co.jemos.podam.common.PodamExclude;
-
 @Entity
 @Data
 public class ComentarioEntity extends BaseEntity{
@@ -19,4 +18,5 @@ public class ComentarioEntity extends BaseEntity{
     @PodamExclude
     @ManyToOne
     private RecetaEntity receta;
+
 }
