@@ -1,6 +1,7 @@
 package co.edu.udistrital.mdp.back.entities;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import lombok.Data;
 import uk.co.jemos.podam.common.PodamExclude;
 
@@ -27,4 +28,12 @@ public class FotoEntity extends BaseEntity {
     @PodamExclude
     @ManyToOne  
     private IngredienteEntity ingrediente;
+
+    @PodamExclude
+    @OneToOne
+    private UbicacionRestauranteEntity ubicacionRestaurante;
+
+    @PodamExclude
+    @ManyToOne
+    private PerfilEntity perfil;
 }
