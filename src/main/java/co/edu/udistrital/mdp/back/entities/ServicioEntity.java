@@ -26,9 +26,6 @@ public class ServicioEntity  extends BaseEntity{
     @OneToMany(mappedBy = "servicio")
     private List<ComentarioEntity> comentarios;
 
-    @PodamExclude
-    @OneToMany(mappedBy = "servicios")
-    private ProfesionalEntity profesional;
 
     @PodamExclude
     @OneToOne(mappedBy = "servicio")
