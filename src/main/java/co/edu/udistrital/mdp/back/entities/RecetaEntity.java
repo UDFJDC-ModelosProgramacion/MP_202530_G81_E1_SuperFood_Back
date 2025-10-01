@@ -19,17 +19,17 @@ public class RecetaEntity  extends BaseEntity{
     private PreparacionEntity preparacion;
 
     @podamExclude;
-    @oneToMany(mappedBy "preparacion");
+    @ManyToMany(mappedBy "recetas");
 
     private List <FotosEntity> fotos = new ArrayList<>();
 
     @podamExclude;
-    @oneToMany(mappedBy "preparacion");
+    @oneToMany(mappedBy "receta");
 
     private List <ComentarioEntity> comentarios = new ArrayList<>(); // esta clase no extiste la persona responsable de comentario entity debe cambiarle el nombre
 
     @podamExclude;
-    @ManyToOne(mappedBy "preparacion");
+    @ManyToOne(mappedBy "preparaciones"); 
 
     private ChefAficionadoEntity chefAficionado;
 

@@ -4,20 +4,25 @@ package co.edu.udistrital.mdp.back.entities;
 import jakarta.persistence.Entity;
 import lombok.Data;
 
+enum CategoriaIngredienteEnum {
+    PROTEINA,
+    GRASA,
+    CARBOHIDRATO
+}
 @Data
 @Entity
 
 public class IngredienteEntity  extends BaseEntity{
 
     String nombre;
-    String categoria;
+    CategoriaIngredienteEnum categoria;
 
     @podamExclude;
     @onetoMany(mappedBy = "ingrediente")
     private List <FotoEntity> fotos = new arrayList<>();
 
     @podamExclude;
-    @manyToOne()
-    private PreparacionEntity preparacion;
+    @ManyToMany()
+    private PreparacionEntity preparaciones;
 
 }

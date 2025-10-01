@@ -17,12 +17,12 @@ public class PreparacionEntity  extends BaseEntity{
     private RecetaEntity receta;
 
     @PodamExclude;
-    @ManyToMany(mappedBy "utensilio");
+    @ManyToMany(mappedBy "preparaciones");
 
     private List <UtensiliosEntity> utensilios = new ArrayList<>();
 
     @PodamExclude;
-    @OneToMany(mappedBy "ingrediente");
+    @ManyToMany(mappedBy "preparaciones");
 
     private List <IngredienteEntity> ingredientes = new ArrayList<>();
 
