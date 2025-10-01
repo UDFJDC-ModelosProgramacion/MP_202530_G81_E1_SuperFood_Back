@@ -3,7 +3,7 @@ import jakarta.persistence.Entity;
 import lombok.Data;
 @Entity
 @Data
-public class Comentario extends BaseEntity{
+public class ComentarioEntity extends BaseEntity{
     private Integer calificacion;
     private String descripcion;
     private String nobreUsuario;
