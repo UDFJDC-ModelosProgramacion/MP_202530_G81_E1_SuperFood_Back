@@ -6,6 +6,6 @@ import lombok.Data;
 @Data
 
 
-public class UbicacionRestaurante extends BaseEntity{
+public class UbicacionRestauranteEntity extends BaseEntity{
     private String direccion;
 }
