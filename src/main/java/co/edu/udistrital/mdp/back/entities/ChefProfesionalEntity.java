@@ -20,7 +20,7 @@ public class ChefProfesionalEntity extends ChefAficionadoEntity {
     private List<ServicioEntity> servicios = new ArrayList<>();
 
     @PodamExclude
-    @ManyToMany(mappedBy = "chefProfesionale")
+    @ManyToMany(mappedBy = "chefProfesionales")
 
     private List<RestauranteEntity> restaurantes = new ArrayList<>();
 }
