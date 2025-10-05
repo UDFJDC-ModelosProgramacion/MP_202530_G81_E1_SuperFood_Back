@@ -6,7 +6,6 @@ import jakarta.persistence.OneToMany;
 import lombok.Data;
 import java.util.ArrayList;
 import java.util.List;
-import jakarta.persistence.ManyToMany;
 import uk.co.jemos.podam.common.PodamExclude;
 
 
@@ -25,7 +24,7 @@ public class IngredienteEntity  extends BaseEntity{
     private List <FotoEntity> fotos = new ArrayList<>();
 
     @PodamExclude
-    @ManyToMany()
-    private List <PreparacionEntity>  preparaciones = new ArrayList<>();
+    @OneToMany(mappedBy = "ingrediente")
+    private List <IngredientePreparacionEntity>  preparaciones = new ArrayList<>();
 
 }
