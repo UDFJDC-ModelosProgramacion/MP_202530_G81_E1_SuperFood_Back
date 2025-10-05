@@ -7,15 +7,8 @@ import lombok.Data;
 import java.util.ArrayList;
 import java.util.List;
 import jakarta.persistence.ManyToMany;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
 import uk.co.jemos.podam.common.PodamExclude;
 
-enum CategoriaIngredienteEnum {
-    PROTEINA,
-    GRASA,
-    CARBOHIDRATO
-}
 
 @Data
 @Entity
@@ -23,7 +16,9 @@ enum CategoriaIngredienteEnum {
 public class IngredienteEntity  extends BaseEntity{
 
     String nombre;
-    CategoriaIngredienteEnum categoria;
+    Boolean esProteina;
+    Boolean esGrasa;
+    Boolean esCarbohidrato;
 
     @PodamExclude
     @OneToMany(mappedBy = "ingrediente")
