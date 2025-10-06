@@ -14,10 +14,11 @@ import java.util.List;
 
 public class PreparacionEntity  extends BaseEntity{
 
-    String descripcionPasos;
+    String nombre;
+    String pasos;
 
     @PodamExclude
-    @OneToOne
+    @ManyToOne 
 
     private RecetaEntity receta;
 
@@ -27,10 +28,8 @@ public class PreparacionEntity  extends BaseEntity{
     private List <UtensiliosEntity> utensilios = new ArrayList<>();
 
     @PodamExclude
-    @ManyToMany(mappedBy = "preparaciones")
+    @OneToMany(mappedBy = "preparacion")
 
-    private List <IngredienteEntity> ingredientes = new ArrayList<>();
-
-
+    private List <IngredientePreparacionEntity> ingredientes = new ArrayList<>();
 
 }
