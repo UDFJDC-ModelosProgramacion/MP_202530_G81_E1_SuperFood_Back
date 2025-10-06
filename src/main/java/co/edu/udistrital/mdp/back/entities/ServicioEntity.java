@@ -16,7 +16,6 @@ enum CategoriaServicio {
     CLASES_DE_COCINA,
     CONSULTORIA_GASTRONOMICA
 }
-
 @Entity
 @Data
 public class ServicioEntity  extends BaseEntity{
