@@ -8,4 +8,6 @@ import lombok.Data;
 
 public class UbicacionRestauranteEntity extends BaseEntity{
     private String direccion;
+
+    
 }
