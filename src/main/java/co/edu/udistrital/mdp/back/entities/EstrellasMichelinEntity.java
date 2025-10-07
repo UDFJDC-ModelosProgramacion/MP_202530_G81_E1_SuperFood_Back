@@ -10,5 +10,5 @@ public class EstrellasMichelinEntity extends BaseEntity {
 
     private String descripcion;
     private Integer CantidadEstrellas;
-    
+     
 }
