@@ -16,4 +16,8 @@ public class UsuarioEntity extends BaseEntity {
     @PodamExclude
     @OneToMany(mappedBy = "evento")
     private List<EventoEntity> eventos = new ArrayList<>();
+
+    public Long getId() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 }
