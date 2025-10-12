@@ -16,7 +16,7 @@ public class UsuarioEntity extends BaseEntity {
     private String email;
 
     @PodamExclude
-    @ManyToMany(mappedBy = "usuario")
+    @ManyToMany()
     private List<EventoEntity> eventos = new ArrayList<>();
 
     @PodamExclude
@@ -24,6 +24,22 @@ public class UsuarioEntity extends BaseEntity {
     private PerfilEntity perfil;
 
     public Long getId() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        throw new UnsupportedOperationException("no implementado todavía");
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 }

@@ -19,7 +19,38 @@ public class EventoEntity extends BaseEntity {
     private LocalDateTime fecha;    // Fecha y hora del evento
 
     @PodamExclude
-    @ManyToMany
+    @ManyToMany(mappedBy = "eventos")
     private List<UsuarioEntity> usuarios = new ArrayList<>();
+
+    public String getNombre() {
+        return nombre;
+    }
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+    public String getDescripcion() {
+        return descripcion;
+    }
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+    public String getUbicacion() {
+        return ubicacion;
+    }
+    public void setUbicacion(String ubicacion) {
+        this.ubicacion = ubicacion;
+    }
+    public LocalDateTime getFecha() {
+        return fecha;
+    }
+    public void setFecha(LocalDateTime fecha) {
+        this.fecha = fecha;
+    }
+    public List<UsuarioEntity> getUsuarios() {
+        return usuarios;
+    }
+    public void setUsuarios(List<UsuarioEntity> usuarios) {
+        this.usuarios = usuarios;
+    }
 
 }
