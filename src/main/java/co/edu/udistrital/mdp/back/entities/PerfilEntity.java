@@ -10,11 +10,12 @@ import uk.co.jemos.podam.common.PodamExclude;
 @Data
 @Entity
 public class PerfilEntity extends BaseEntity {
+    
     private String descripcion;
     private String comidaPreferida;
 
     @PodamExclude
-    @OneToMany(mappedBy = "foto")
+    @OneToMany(mappedBy = "perfil")
     private List<FotoEntity> fotos = new ArrayList<>();
     
 }
