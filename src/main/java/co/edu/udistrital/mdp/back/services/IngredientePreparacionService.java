@@ -26,15 +26,7 @@ public class IngredientePreparacionService {
     @Autowired
     private PreparacionRepository preparacionRepository;
 
-    /**
-     * Asociar un ingrediente a una preparación, con su gramaje y porción.
-     *
-     * @param preparacionId ID de la preparación
-     * @param ingredienteId ID del ingrediente
-     * @param gramaje       Cantidad del ingrediente (en gramos)
-     * @param porcion       Descripcion de la relacion de porcion
-     * @return La relación creada entre ingrediente y preparación.
-     */
+    //Asociar un ingrediente a una preparación, con su gramaje y porción.
     @Transactional
     public IngredientePreparacionEntity asociarIngrediente(
             Long preparacionId,
@@ -57,12 +49,7 @@ public class IngredientePreparacionService {
         return ingredientePreparacionRepository.save(relacion);
     }
 
-    /**
-     * Quitar un ingrediente de una preparación
-     *
-     * @param preparacionId ID de la preparación
-     * @param ingredienteId ID del ingrediente
-     */
+    //quitar un ingrediente de una preparacion
     @Transactional
     public void quitarIngrediente(Long preparacionId, Long ingredienteId) throws EntityNotFoundException {
         IngredientePreparacionEntity relacion = ingredientePreparacionRepository
@@ -72,12 +59,7 @@ public class IngredientePreparacionService {
         ingredientePreparacionRepository.delete(relacion);
     }
 
-    /**
-     * Consultar todos los ingredientes asociados a una preparación.
-     *
-     * @param preparacionId ID de la preparación
-     * @return Lista de ingredientes con sus gramajes y porciones.
-     */
+    //consultar todos los ingredientes asociados a una preparacion
     public List<IngredientePreparacionEntity> consultarIngredientes(Long preparacionId) throws EntityNotFoundException {
         PreparacionEntity preparacion = preparacionRepository.findById(preparacionId)
                 .orElseThrow(() -> new EntityNotFoundException("Preparación no encontrada"));

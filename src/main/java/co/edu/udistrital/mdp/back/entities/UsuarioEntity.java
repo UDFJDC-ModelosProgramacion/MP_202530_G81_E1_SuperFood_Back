@@ -4,7 +4,6 @@ import jakarta.persistence.Entity;
 import lombok.Data;
 import uk.co.jemos.podam.common.PodamExclude;
 import jakarta.persistence.ManyToMany;
-import jakarta.persistence.OneToOne;
 import java.util.List;
 import java.util.ArrayList;
 

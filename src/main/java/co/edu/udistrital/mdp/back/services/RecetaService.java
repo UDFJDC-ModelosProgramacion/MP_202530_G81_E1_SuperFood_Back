@@ -28,10 +28,6 @@ public class RecetaService {
      * 
      * Al crear una receta se le asocian las preparaciones.
      * La receta se crea con nombre, tiempo de preparación, porciones y descripción.
-     * 
-     * @param receta Objeto con los datos básicos.
-     * @param preparaciones Lista de preparaciones que se van a asociar.
-     * @return Receta creada con sus preparaciones asociadas.
      */
     @Transactional
     public RecetaEntity crearReceta(RecetaEntity receta, List<Long> idsPreparaciones) {
@@ -43,14 +39,7 @@ public class RecetaService {
         return recetaRepository.save(receta);
     }
 
-    /**
-     * Actualizar una receta existente.
-     * 
-     * @param recetaId ID de la receta a modificar.
-     * @param nuevosDatos Datos actualizados de la receta.
-     * @param idsPreparaciones IDs de preparaciones nuevas que reemplazarán las anteriores.
-     * @return Receta actualizada.
-     */
+    //Actualizar una receta existente
     @Transactional
     public RecetaEntity actualizarReceta(Long recetaId, RecetaEntity nuevosDatos, List<Long> idsPreparaciones) {
         RecetaEntity receta = recetaRepository.findById(recetaId)
@@ -69,13 +58,7 @@ public class RecetaService {
         return recetaRepository.save(receta);
     }
 
-    /**
-     * Eliminar una receta.
-     * 
-     * Al eliminar una receta se eliminan sus relaciones con preparaciones.
-     * 
-     * @param recetaId ID de la receta a eliminar.
-     */
+    //Eliminar una receta
     @Transactional
     public void eliminarReceta(Long recetaId) {
         RecetaEntity receta = recetaRepository.findById(recetaId)
@@ -86,23 +69,14 @@ public class RecetaService {
         recetaRepository.delete(receta);
     }
 
-    /**
-     * Consultar una receta por su ID.
-     * 
-     * @param recetaId ID de la receta.
-     * @return Receta encontrada.
-     */
+    //consultar receta por id
     @Transactional
     public RecetaEntity obtenerRecetaPorId(Long recetaId) {
         return recetaRepository.findById(recetaId)
                 .orElseThrow(() -> new EntityNotFoundException("Receta no encontrada con id: " + recetaId));
     }
 
-    /**
-     * Consultar todas las recetas.
-     * 
-     * @return Lista de recetas.
-     */
+    //consultar todas las recetas
     @Transactional
     public List<RecetaEntity> obtenerTodasLasRecetas() {
         return recetaRepository.findAll();
