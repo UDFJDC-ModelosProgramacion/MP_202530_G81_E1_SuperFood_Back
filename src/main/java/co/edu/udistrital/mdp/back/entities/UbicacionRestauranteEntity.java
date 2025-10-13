@@ -3,8 +3,11 @@ package co.edu.udistrital.mdp.back.entities;
 import jakarta.persistence.Entity;
 import lombok.Data;
 
-@Data
 @Entity
-public class AficionadoEntity extends BaseEntity {
-    private String descripcionExperiencia;
+@Data
+
+
+public class UbicacionRestauranteEntity extends BaseEntity{
+    private String direccion;
+
 }
