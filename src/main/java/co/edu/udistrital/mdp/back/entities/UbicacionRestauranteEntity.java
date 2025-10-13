@@ -1,4 +1,5 @@
 package co.edu.udistrital.mdp.back.entities;
+
 import jakarta.persistence.Entity;
 import lombok.Data;
 
@@ -8,4 +9,5 @@ import lombok.Data;
 
 public class UbicacionRestauranteEntity extends BaseEntity{
     private String direccion;
+
 }
