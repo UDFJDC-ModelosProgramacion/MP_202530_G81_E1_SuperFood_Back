@@ -18,7 +18,7 @@ enum CategoriaServicio {
 }
 @Entity
 @Data
-public class ServicioEntity  extends BaseEntity{
+public class ServicioEntity extends BaseEntity{
     private String nombre;
     private String descripcion;
     private Double costo;
