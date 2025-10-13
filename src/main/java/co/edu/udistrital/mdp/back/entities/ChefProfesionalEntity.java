@@ -3,12 +3,10 @@ package co.edu.udistrital.mdp.back.entities;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.ManyToMany;
-import lombok.Data;
 import uk.co.jemos.podam.common.PodamExclude;
 import java.util.ArrayList;
 import java.util.List;
 
-@Data
 @Entity
 public class ChefProfesionalEntity extends ChefAficionadoEntity {
 
@@ -22,7 +20,7 @@ public class ChefProfesionalEntity extends ChefAficionadoEntity {
     @PodamExclude
     @ManyToMany(mappedBy = "chefProfesionales")
     private List<RestauranteEntity> restaurantes = new ArrayList<>();
-    
+
     public String getEspecialidad() {
         return especialidad;
     }
@@ -37,5 +35,25 @@ public class ChefProfesionalEntity extends ChefAficionadoEntity {
 
     public void setVerificado(boolean verificado) {
         this.verificado = verificado;
+    }
+
+    public List<ServicioEntity> getServicios() {
+        return servicios;
+    }
+
+    public void setServicios(List<ServicioEntity> servicios) {
+        this.servicios = servicios;
+    }
+
+    public List<RestauranteEntity> getRestaurantes() {
+        return restaurantes;
+    }
+
+    public void setRestaurantes(List<RestauranteEntity> restaurantes) {
+        this.restaurantes = restaurantes;
+    }
+
+    public Long getId() {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }
