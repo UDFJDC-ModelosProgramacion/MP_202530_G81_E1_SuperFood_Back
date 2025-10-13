@@ -6,6 +6,6 @@ import co.edu.udistrital.mdp.back.entities.UtensiliosEntity;
 
 @Repository
 public interface UtensiliosRepository extends JpaRepository<UtensiliosEntity, Long> {
-
+    
     boolean existsByNombreAndMarca(String nombre, String marca);
 }

@@ -19,27 +19,4 @@ public class UsuarioEntity extends BaseEntity {
     @ManyToMany()
     private List<EventoEntity> eventos = new ArrayList<>();
 
-    @PodamExclude
-    @OneToOne(mappedBy = "usuario")
-    private PerfilEntity perfil;
-
-    public Long getId() {
-        throw new UnsupportedOperationException("no implementado todavía");
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
 }
