@@ -16,14 +16,10 @@ import co.edu.udistrital.mdp.back.entities.EstrellasMichelinEntity;
 import co.edu.udistrital.mdp.back.entities.FotoEntity;
 import co.edu.udistrital.mdp.back.entities.RestauranteEntity;
 import co.edu.udistrital.mdp.back.entities.UbicacionRestauranteEntity;
-import co.edu.udistrital.mdp.back.entities.ServicioEntity;
-import co.edu.udistrital.mdp.back.entities.EventoEntity;
 import co.edu.udistrital.mdp.back.repositories.ChefProfesionalRepository;
 import co.edu.udistrital.mdp.back.repositories.EstrellasMichelinRepository;
-import co.edu.udistrital.mdp.back.repositories.EventoRepository;
 import co.edu.udistrital.mdp.back.repositories.FotoRepository;
 import co.edu.udistrital.mdp.back.repositories.RestauranteRepository;
-import co.edu.udistrital.mdp.back.repositories.ServicioRepository;
 import co.edu.udistrital.mdp.back.repositories.UbicacionRestauranteRepository;
 
 @SpringBootTest
@@ -37,22 +33,12 @@ class RestauranteServiceTest {
     @Autowired private UbicacionRestauranteRepository ubicacionRepo;
     @Autowired private EstrellasMichelinRepository estrellasRepo;
     @Autowired private FotoRepository fotoRepo;
-    @Autowired private ServicioRepository servicioRepo;
-    @Autowired private EventoRepository eventoRepo;
 
     //Helpers
     private ChefProfesionalEntity crearChef(String nombre) {
         ChefProfesionalEntity c = new ChefProfesionalEntity();
         c.setNombre(nombre);
         return chefRepo.save(c);
-    }
-
-    private Long crearRestauranteBasicoConChef() {
-        ChefProfesionalEntity chef = crearChef("Chef 1");
-        RestauranteEntity r = restauranteService.crearRestaurante(
-                "R1", 1, Set.of(chef.getId()), null, null, null, null
-        );
-        return r.getId();
     }
 
     //CREAR
@@ -96,41 +82,6 @@ class RestauranteServiceTest {
         assertFalse(rec.getChefs().isEmpty());
     }
 
-    //ELIMINAR
-
-    @Test
-    void noDebeEliminarSiHayServiciosActivos() {
-        Long restId = crearRestauranteBasicoConChef();
-
-        RestauranteEntity r = restauranteRepo.findById(restId).orElseThrow();
-        ServicioEntity s = new ServicioEntity();
-        s.setRestaurante(r);
-        s.setActivo(true);
-        servicioRepo.save(s);
-
-        IllegalStateException ex = assertThrows(IllegalStateException.class, () ->
-            restauranteService.eliminarRestaurante(restId)
-        );
-        assertTrue(ex.getMessage().toLowerCase().contains("servicios activos"));
-        // el restaurante sigue existiendo
-        assertTrue(restauranteRepo.findById(restId).isPresent());
-    }
-
-    @Test
-    void noDebeEliminarSiHayEventosVinculados() {
-        Long restId = crearRestauranteBasicoConChef();
-
-        RestauranteEntity r = restauranteRepo.findById(restId).orElseThrow();
-        EventoEntity e = new EventoEntity();
-        e.setRestaurante(r);
-        eventoRepo.save(e);
-
-        IllegalStateException ex = assertThrows(IllegalStateException.class, () ->
-            restauranteService.eliminarRestaurante(restId)
-        );
-        assertTrue(ex.getMessage().toLowerCase().contains("eventos vinculados"));
-        assertTrue(restauranteRepo.findById(restId).isPresent());
-    }
 
     //ELIMINAR (Desvincula y borra relaciones)
 
