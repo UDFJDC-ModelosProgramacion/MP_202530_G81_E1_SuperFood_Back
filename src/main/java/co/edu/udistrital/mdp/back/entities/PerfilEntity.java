@@ -23,28 +23,4 @@ public class PerfilEntity extends BaseEntity {
     @OneToOne
     private UsuarioEntity usuario;
     
-    public String getDescripcion() {
-        return descripcion;
-    }
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-    public String getComidaPreferida() {
-        return comidaPreferida;
-    }
-    public void setComidaPreferida(String comidaPreferida) {
-        this.comidaPreferida = comidaPreferida;
-    }
-    public List<FotoEntity> getFotos() {
-        return fotos;
-    }
-    public void setFotos(List<FotoEntity> fotos) {
-        this.fotos = fotos;
-    }
-    public UsuarioEntity getUsuario() {
-        return usuario;
-    }
-    public void setUsuario(UsuarioEntity usuario) {
-        this.usuario = usuario;
-    }
 }
