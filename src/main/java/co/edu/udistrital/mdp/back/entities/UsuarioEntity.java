@@ -23,10 +23,6 @@ public class UsuarioEntity extends BaseEntity {
     @OneToOne(mappedBy = "usuario")
     private PerfilEntity perfil;
 
-    public Long getId() {
-        throw new UnsupportedOperationException("no implementado todavía");
-    }
-
     public String getNombre() {
         return nombre;
     }

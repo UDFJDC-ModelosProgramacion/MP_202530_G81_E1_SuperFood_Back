@@ -6,7 +6,5 @@ import co.edu.udistrital.mdp.back.entities.ServicioEntity;
 
 @Repository
 public interface ServicioRepository extends JpaRepository<ServicioEntity, Long> {
-
-      boolean existsByRestaurante_IdAndActivoTrue(Long restauranteId);
-            
+    // Repository methods will be added as needed based on actual entity relationships
 }

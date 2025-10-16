@@ -4,7 +4,8 @@ package co.edu.udistrital.mdp.back.entities;
 import jakarta.persistence.Entity;
 import lombok.Data;
 import jakarta.persistence.ManyToMany;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import uk.co.jemos.podam.common.PodamExclude;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,8 +24,7 @@ public class PreparacionEntity  extends BaseEntity{
     private RecetaEntity receta;
 
     @PodamExclude
-    @ManyToMany(mappedBy = "preparaciones")
-
+    @ManyToMany
     private List <UtensiliosEntity> utensilios = new ArrayList<>();
 
     @PodamExclude

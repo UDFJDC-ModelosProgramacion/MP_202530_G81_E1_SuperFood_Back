@@ -8,8 +8,6 @@ import lombok.Data;
 @Data
 public class IngredientePreparacionEntity extends BaseEntity {
 
-    private Long id;
-
     private double gramaje;
     private String porcion;
 
