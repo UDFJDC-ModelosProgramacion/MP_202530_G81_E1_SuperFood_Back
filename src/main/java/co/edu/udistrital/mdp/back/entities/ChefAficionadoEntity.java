@@ -2,12 +2,10 @@ package co.edu.udistrital.mdp.back.entities;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
-import lombok.Data;
 import uk.co.jemos.podam.common.PodamExclude;
 import java.util.ArrayList;
 import java.util.List;
 
-@Data
 @Entity
 public class ChefAficionadoEntity extends UsuarioEntity {
 
@@ -16,7 +14,6 @@ public class ChefAficionadoEntity extends UsuarioEntity {
 
     @PodamExclude
     @OneToMany(mappedBy = "chefAficionado")
-    
     private List<RecetaEntity> recetas = new ArrayList<>();
 
     public String getExperiencia() {
@@ -33,5 +30,17 @@ public class ChefAficionadoEntity extends UsuarioEntity {
 
     public void setMejorPlatillo(String mejorPlatillo) {
         this.mejorPlatillo = mejorPlatillo;
+    }
+
+    public List<RecetaEntity> getRecetas() {
+        return recetas;
+    }
+
+    public void setRecetas(List<RecetaEntity> recetas) {
+        this.recetas = recetas;
+    }
+
+    public Long getId() {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }
