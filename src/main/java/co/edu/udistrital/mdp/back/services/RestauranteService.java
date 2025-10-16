@@ -18,8 +18,6 @@ import co.edu.udistrital.mdp.back.repositories.EstrellasMichelinRepository;
 import co.edu.udistrital.mdp.back.repositories.FotoRepository;
 import co.edu.udistrital.mdp.back.repositories.RestauranteRepository;
 import co.edu.udistrital.mdp.back.repositories.UbicacionRestauranteRepository;
-import co.edu.udistrital.mdp.back.repositories.ServicioRepository;
-import co.edu.udistrital.mdp.back.repositories.EventoRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
@@ -33,10 +31,6 @@ public class RestauranteService {
     @Autowired private UbicacionRestauranteRepository ubicacionRepository;
     @Autowired private EstrellasMichelinRepository estrellasRepository;
     @Autowired private FotoRepository fotoRepository;
-
-    // Servicios de dominio para validar bloqueos de borrado
-    @Autowired private ServicioRepository servicioRepository;
-    @Autowired private EventoRepository eventoRepository;
 
     /**
      * Crea un restaurante:
@@ -103,16 +97,7 @@ public class RestauranteService {
         RestauranteEntity r = restauranteRepository.findById(restauranteId)
                 .orElseThrow(() -> new EntityNotFoundException("Restaurante no existe (id=" + restauranteId + ")."));
 
-        // Validar si existen servicios activos
-        if (servicioRepository.existsByRestaurante_IdAndActivoTrue(restauranteId)) {
-         throw new IllegalStateException("No se puede eliminar: tiene servicios activos.");
-}
-
-        // Validar si existen eventos vinculados
-        if (eventoRepository.existsByRestaurante_Id(restauranteId)) {
-         throw new IllegalStateException("No se puede eliminar: tiene eventos vinculados.");
-}
-
+        // Note: Service validation removed due to entity relationship structure
 
         // 1) Desvincular Many-to-Many con chefs
         if (r.getChefs() != null && !r.getChefs().isEmpty()) {

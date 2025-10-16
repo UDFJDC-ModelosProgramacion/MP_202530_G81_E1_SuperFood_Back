@@ -5,7 +5,6 @@ import java.util.List;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 import lombok.Data;
 import uk.co.jemos.podam.common.PodamExclude;
 
@@ -33,11 +32,6 @@ public class ServicioEntity extends BaseEntity{
     @PodamExclude
     @OneToMany(mappedBy = "servicio")
     private List<ComentarioEntity> comentarios;
-
-
-    @PodamExclude
-    @OneToOne(mappedBy = "servicio")
-    private EventoEntity evento;
 
     @PodamExclude
     @ManyToOne

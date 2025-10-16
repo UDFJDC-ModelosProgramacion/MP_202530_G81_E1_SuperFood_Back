@@ -66,7 +66,7 @@ public class UsuarioService {
     
     //buscar usuarios por nombre
     public java.util.List<UsuarioEntity> buscarPorNombre(String nombre) {
-        return usuarioRepository.findByName(nombre);
+        return usuarioRepository.findByNombre(nombre);
     }
 
     //ver todos los usuarios
