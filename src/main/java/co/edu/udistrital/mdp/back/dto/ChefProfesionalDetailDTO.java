@@ -2,7 +2,7 @@ package co.edu.udistrital.mdp.back.dto;
 
 import java.util.List;
 import java.util.ArrayList;
-import co.edu.udistrital.mdp.back.dto.UtensilioDetailDTO;
+import co.edu.udistrital.mdp.back.dto.UtensiliosDetailDTO;
 import co.edu.udistrital.mdp.back.dto.ServicioDetailDTO;
 import co.edu.udistrital.mdp.back.dto.RestauranteDetailDTO;
 import co.edu.udistrital.mdp.back.dto.PerfilDTO;

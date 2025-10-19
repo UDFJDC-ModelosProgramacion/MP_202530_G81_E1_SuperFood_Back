@@ -9,7 +9,7 @@ public class UtensiliosDTO {
     private static final Logger logger = Logger.getLogger(UtensiliosDTO.class.getName());
 
     private String nombre;
-    private List<PreparacionDTO> preparaciones = new ArrayList<>(); // Relación 1..* con PreparacionDTO
+    private List<PreparacionDTO> preparaciones = new ArrayList<>(); 
 
     public void mostrarUtensilio() {
     logger.log(java.util.logging.Level.INFO, "Utensilio: {0}", nombre);
