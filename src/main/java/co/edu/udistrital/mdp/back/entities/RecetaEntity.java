@@ -2,9 +2,7 @@ package co.edu.udistrital.mdp.back.entities;
 
 import jakarta.persistence.Entity;
 import lombok.Data;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.OneToMany;
 import uk.co.jemos.podam.common.PodamExclude;
 import java.util.ArrayList;
@@ -26,8 +24,7 @@ public class RecetaEntity  extends BaseEntity{
     private List <PreparacionEntity> preparaciones = new ArrayList<>();
 
     @PodamExclude
-    @ManyToMany(mappedBy = "recetas")
-
+    @OneToMany(mappedBy = "receta")
     private List <FotoEntity> fotos = new ArrayList<>();
 
     @PodamExclude
@@ -35,8 +32,9 @@ public class RecetaEntity  extends BaseEntity{
 
     private List <ComentarioEntity> comentarios = new ArrayList<>();
 
-
-
+    @PodamExclude
+    @ManyToOne
+    private ChefAficionadoEntity chefAficionado;
 
 
 
