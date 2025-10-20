@@ -64,4 +64,23 @@ public class FotoService {
     public java.util.List<FotoEntity> obtenerTodasLasFotos() {
         return fotoRepository.findAll();
     }
+    //obtener foto por id
+    public FotoEntity obtenerFotoPorId(Long id) {
+        return fotoRepository.findById(id).orElse(null);
+    }
+    //actualizar foto
+    public FotoEntity actualizarFoto(Long id, FotoEntity foto) {
+        FotoEntity fotoActual = fotoRepository.findById(id).orElse(null);
+        if (fotoActual != null) {
+            fotoActual.setEnlace(foto.getEnlace());
+            fotoActual.setServicio(foto.getServicio());
+            fotoActual.setRestaurante(foto.getRestaurante());
+            fotoActual.setReceta(foto.getReceta());
+            fotoActual.setIngrediente(foto.getIngrediente());
+            fotoActual.setPerfil(foto.getPerfil());
+            fotoActual.setUbicacionRestaurante(foto.getUbicacionRestaurante());
+            return fotoRepository.save(fotoActual);
+        }
+        return null;
+    }
 }
