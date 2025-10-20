@@ -8,6 +8,6 @@ import lombok.Data;
 
 public class RecetaDetailDTO extends RecetaDTO{
     private List <PreparacionDTO> preparaciones = new ArrayList<>();
-    private List <FotoEntityDTO> fotos = new ArrayList<>();
-    private List <ComentarioEntityDTO> comentarios = new ArrayList<>();
+    private List <FotoDTO> fotos = new ArrayList<>();
+    private List <ComentarioDTO> comentarios = new ArrayList<>();
 }
