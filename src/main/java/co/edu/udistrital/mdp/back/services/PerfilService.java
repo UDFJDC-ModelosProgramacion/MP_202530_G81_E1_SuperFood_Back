@@ -50,10 +50,8 @@ public class PerfilService {
 
     // ver un perfil
     public PerfilEntity verPerfil(Long id) {
-        if (!perfilRepository.existsById(id)) {
-            throw new IllegalArgumentException("El perfil no existe.");
-        }
-        return perfilRepository.findById(id).get();
+        return perfilRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("El perfil no existe."));
     }
 
 }
