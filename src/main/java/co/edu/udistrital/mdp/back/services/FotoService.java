@@ -78,7 +78,7 @@ public class FotoService {
             fotoActual.setReceta(foto.getReceta());
             fotoActual.setIngrediente(foto.getIngrediente());
             fotoActual.setPerfil(foto.getPerfil());
-            fotoActual.setUbicacionRestaurante(foto.getUbicacionRestaurante());
+            //fotoActual.setUbicacionRestaurante(foto.getUbicacionRestaurante());
             return fotoRepository.save(fotoActual);
         }
         return null;

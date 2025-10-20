@@ -39,7 +39,7 @@ public class FotoServiceTest {
     private List<RestauranteEntity> restauranteList = new ArrayList<>();
     private List<IngredienteEntity> ingredienteList = new ArrayList<>();
     private List<PerfilEntity> perfilList = new ArrayList<>();
-    private List<UbicacionRestauranteEntity> ubicacionRestauranteList = new ArrayList<>();
+    //private List<UbicacionRestauranteEntity> ubicacionRestauranteList = new ArrayList<>();
     
     @BeforeEach
     void setUp() {
@@ -86,7 +86,7 @@ public class FotoServiceTest {
         for (int i = 0; i < 3; i++) {
             UbicacionRestauranteEntity ubicacionRestaurante = factory.manufacturePojo(UbicacionRestauranteEntity.class);
             entityManager.persist(ubicacionRestaurante);
-            ubicacionRestauranteList.add(ubicacionRestaurante);
+            //ubicacionRestauranteList.add(ubicacionRestaurante);
         }
         for (int i = 0; i < 3; i++) {
             FotoEntity foto = factory.manufacturePojo(FotoEntity.class);
@@ -95,7 +95,7 @@ public class FotoServiceTest {
             foto.setRestaurante(restauranteList.get(0));
             foto.setIngrediente(ingredienteList.get(0));
             foto.setPerfil(perfilList.get(0));
-            foto.setUbicacionRestaurante(ubicacionRestauranteList.get(0));
+            //foto.setUbicacionRestaurante(ubicacionRestauranteList.get(0));
             entityManager.persist(foto);
             fotoList.add(foto);
         }
@@ -106,8 +106,8 @@ public class FotoServiceTest {
         if (foto.getEnlace() == null || foto.getEnlace().isEmpty()) {
             throw new IllegalOperationException("El enlace de la foto no puede ser nulo o vacío");
         }
-        if (foto.getIngrediente() == null || foto.getReceta() == null || foto.getRestaurante() == null || foto.getServicio() == null || foto.getPerfil() == null || foto.getUbicacionRestaurante() == null) {
-            throw new IllegalOperationException("La foto debe estar asociada a un ingrediente, receta, restaurante, servicio, perfil y ubicacionRestaurante");
+        if (foto.getIngrediente() == null || foto.getReceta() == null || foto.getRestaurante() == null || foto.getServicio() == null || foto.getPerfil() == null /*|| foto.getUbicacionRestaurante() == null*/) {
+            throw new IllegalOperationException("La foto debe estar asociada a un ingrediente, receta, restaurante, servicio y perfil");
         }
         return fotoRepository.save(foto);
     }
@@ -161,7 +161,7 @@ public class FotoServiceTest {
         newFoto.setRestaurante(restauranteList.get(0));
         newFoto.setIngrediente(ingredienteList.get(0));
         newFoto.setPerfil(perfilList.get(0));
-        newFoto.setUbicacionRestaurante(ubicacionRestauranteList.get(0));
+        //newFoto.setUbicacionRestaurante(ubicacionRestauranteList.get(0));
         FotoEntity result = fotoService.crearFoto(newFoto);
         assertNotNull(result);
         FotoEntity entity = entityManager.find(FotoEntity.class, result.getId());
@@ -184,7 +184,7 @@ public class FotoServiceTest {
             newFoto.setRestaurante(restauranteList.get(0));
             newFoto.setIngrediente(ingredienteList.get(0));
             newFoto.setPerfil(perfilList.get(0));
-            newFoto.setUbicacionRestaurante(ubicacionRestauranteList.get(0));
+            //newFoto.setUbicacionRestaurante(ubicacionRestauranteList.get(0));
             fotoService.crearFoto(newFoto);
         });
     }
@@ -199,7 +199,7 @@ public class FotoServiceTest {
             newFoto.setRestaurante(restauranteList.get(0));
             newFoto.setIngrediente(ingredienteList.get(0));
             newFoto.setPerfil(perfilList.get(0));
-            newFoto.setUbicacionRestaurante(ubicacionRestauranteList.get(0));
+            //newFoto.setUbicacionRestaurante(ubicacionRestauranteList.get(0));
             fotoService.crearFoto(newFoto);
         });
     }
@@ -213,7 +213,7 @@ public class FotoServiceTest {
             newFoto.setRestaurante(restauranteList.get(0));
             newFoto.setIngrediente(ingredienteList.get(0));
             newFoto.setPerfil(perfilList.get(0));
-            newFoto.setUbicacionRestaurante(ubicacionRestauranteList.get(0));
+            //newFoto.setUbicacionRestaurante(ubicacionRestauranteList.get(0));
             fotoService.crearFoto(newFoto);
         });
     }
@@ -227,7 +227,7 @@ public class FotoServiceTest {
             newFoto.setRestaurante(restauranteList.get(0));
             newFoto.setIngrediente(ingredienteList.get(0));
             newFoto.setPerfil(perfilList.get(0));
-            newFoto.setUbicacionRestaurante(ubicacionRestauranteList.get(0));
+            //newFoto.setUbicacionRestaurante(ubicacionRestauranteList.get(0));
             fotoService.crearFoto(newFoto);
         });
     }
@@ -241,7 +241,7 @@ public class FotoServiceTest {
             newFoto.setRestaurante(null);
             newFoto.setIngrediente(ingredienteList.get(0));
             newFoto.setPerfil(perfilList.get(0));
-            newFoto.setUbicacionRestaurante(ubicacionRestauranteList.get(0));
+            //newFoto.setUbicacionRestaurante(ubicacionRestauranteList.get(0));
             fotoService.crearFoto(newFoto);
         });
     }
@@ -255,7 +255,7 @@ public class FotoServiceTest {
             newFoto.setRestaurante(restauranteList.get(0));
             newFoto.setIngrediente(null);
             newFoto.setPerfil(perfilList.get(0));
-            newFoto.setUbicacionRestaurante(ubicacionRestauranteList.get(0));
+            //newFoto.setUbicacionRestaurante(ubicacionRestauranteList.get(0));
             fotoService.crearFoto(newFoto);
         });
     }
@@ -269,7 +269,7 @@ public class FotoServiceTest {
             newFoto.setRestaurante(restauranteList.get(0));
             newFoto.setIngrediente(ingredienteList.get(0));
             newFoto.setPerfil(null);
-            newFoto.setUbicacionRestaurante(ubicacionRestauranteList.get(0));
+            //newFoto.setUbicacionRestaurante(ubicacionRestauranteList.get(0));
             fotoService.crearFoto(newFoto);
         });
     }
@@ -283,7 +283,7 @@ public class FotoServiceTest {
             newFoto.setRestaurante(restauranteList.get(0));
             newFoto.setIngrediente(ingredienteList.get(0));
             newFoto.setPerfil(perfilList.get(0));
-            newFoto.setUbicacionRestaurante(null);
+            //newFoto.setUbicacionRestaurante(null);
             fotoService.crearFoto(newFoto);
         }); 
     }
@@ -315,7 +315,7 @@ public class FotoServiceTest {
         assertEquals(entity.getRestaurante(), resultEntity.getRestaurante());
         assertEquals(entity.getIngrediente(), resultEntity.getIngrediente());
         assertEquals(entity.getPerfil(), resultEntity.getPerfil());
-        assertEquals(entity.getUbicacionRestaurante(), resultEntity.getUbicacionRestaurante());
+        //assertEquals(entity.getUbicacionRestaurante(), resultEntity.getUbicacionRestaurante());
     }
     //pruebas unitarias para obtener una foto por id inexistente
     @Test
@@ -343,7 +343,7 @@ public class FotoServiceTest {
         newEntity.setRestaurante(restauranteList.get(0));
         newEntity.setIngrediente(ingredienteList.get(0));
         newEntity.setPerfil(perfilList.get(0));
-        newEntity.setUbicacionRestaurante(ubicacionRestauranteList.get(0));
+        //newEntity.setUbicacionRestaurante(ubicacionRestauranteList.get(0));
         
         fotoService.actualizarFoto(entity.getId(), newEntity);
         FotoEntity resp = entityManager.find(FotoEntity.class, entity.getId());
@@ -355,7 +355,7 @@ public class FotoServiceTest {
         assertEquals(newEntity.getRestaurante(), resp.getRestaurante());
         assertEquals(newEntity.getIngrediente(), resp.getIngrediente());
         assertEquals(newEntity.getPerfil(), resp.getPerfil());
-        assertEquals(newEntity.getUbicacionRestaurante(), resp.getUbicacionRestaurante());
+        //assertEquals(newEntity.getUbicacionRestaurante(), resp.getUbicacionRestaurante());
     }
     //pruebas unitarias para actualizar una foto inexistente
     @Test
@@ -367,7 +367,7 @@ public class FotoServiceTest {
             newEntity.setRestaurante(restauranteList.get(0));
             newEntity.setIngrediente(ingredienteList.get(0));
             newEntity.setPerfil(perfilList.get(0));
-            newEntity.setUbicacionRestaurante(ubicacionRestauranteList.get(0));            
+            //newEntity.setUbicacionRestaurante(ubicacionRestauranteList.get(0));            
             fotoService.actualizarFoto(0L, newEntity);
         });
     }
@@ -381,7 +381,7 @@ public class FotoServiceTest {
             newEntity.setRestaurante(restauranteList.get(0));
             newEntity.setIngrediente(ingredienteList.get(0));
             newEntity.setPerfil(perfilList.get(0));
-            newEntity.setUbicacionRestaurante(ubicacionRestauranteList.get(0));            
+            //newEntity.setUbicacionRestaurante(ubicacionRestauranteList.get(0));            
             fotoService.actualizarFoto(null, newEntity);
         });
     }
@@ -398,7 +398,7 @@ public class FotoServiceTest {
             newEntity.setRestaurante(restauranteList.get(0));
             newEntity.setIngrediente(ingredienteList.get(0));
             newEntity.setPerfil(perfilList.get(0));
-            newEntity.setUbicacionRestaurante(ubicacionRestauranteList.get(0));            
+            //newEntity.setUbicacionRestaurante(ubicacionRestauranteList.get(0));            
             fotoService.actualizarFoto(entity.getId(), newEntity);
         });
     }
@@ -415,7 +415,7 @@ public class FotoServiceTest {
             newEntity.setRestaurante(restauranteList.get(0));
             newEntity.setIngrediente(ingredienteList.get(0));
             newEntity.setPerfil(perfilList.get(0));
-            newEntity.setUbicacionRestaurante(ubicacionRestauranteList.get(0));            
+            //newEntity.setUbicacionRestaurante(ubicacionRestauranteList.get(0));
             fotoService.actualizarFoto(entity.getId(), newEntity);
         });
     }
@@ -431,7 +431,7 @@ public class FotoServiceTest {
             newEntity.setRestaurante(restauranteList.get(0));
             newEntity.setIngrediente(ingredienteList.get(0));
             newEntity.setPerfil(perfilList.get(0));
-            newEntity.setUbicacionRestaurante(ubicacionRestauranteList.get(0));            
+            //newEntity.setUbicacionRestaurante(ubicacionRestauranteList.get(0));
             fotoService.actualizarFoto(entity.getId(), newEntity);
         });
     }
@@ -447,7 +447,7 @@ public class FotoServiceTest {
             newEntity.setRestaurante(restauranteList.get(0));
             newEntity.setIngrediente(ingredienteList.get(0));
             newEntity.setPerfil(perfilList.get(0));
-            newEntity.setUbicacionRestaurante(ubicacionRestauranteList.get(0));            
+            //newEntity.setUbicacionRestaurante(ubicacionRestauranteList.get(0));
             fotoService.actualizarFoto(entity.getId(), newEntity);
         });
     }
@@ -463,7 +463,7 @@ public class FotoServiceTest {
             newEntity.setRestaurante(null);
             newEntity.setIngrediente(ingredienteList.get(0));
             newEntity.setPerfil(perfilList.get(0));
-            newEntity.setUbicacionRestaurante(ubicacionRestauranteList.get(0));            
+            //newEntity.setUbicacionRestaurante(ubicacionRestauranteList.get(0));
             fotoService.actualizarFoto(entity.getId(), newEntity);
         });
     }
@@ -479,7 +479,7 @@ public class FotoServiceTest {
             newEntity.setRestaurante(restauranteList.get(0));
             newEntity.setIngrediente(null);
             newEntity.setPerfil(perfilList.get(0));
-            newEntity.setUbicacionRestaurante(ubicacionRestauranteList.get(0));            
+            //newEntity.setUbicacionRestaurante(ubicacionRestauranteList.get(0));            
             fotoService.actualizarFoto(entity.getId(), newEntity);
         });
     }
@@ -495,7 +495,7 @@ public class FotoServiceTest {
             newEntity.setRestaurante(restauranteList.get(0));
             newEntity.setIngrediente(ingredienteList.get(0));
             newEntity.setPerfil(null);
-            newEntity.setUbicacionRestaurante(ubicacionRestauranteList.get(0));            
+            //newEntity.setUbicacionRestaurante(ubicacionRestauranteList.get(0));
             fotoService.actualizarFoto(entity.getId(), newEntity);
         });
     }
@@ -511,7 +511,7 @@ public class FotoServiceTest {
             newEntity.setRestaurante(restauranteList.get(0));
             newEntity.setIngrediente(ingredienteList.get(0));
             newEntity.setPerfil(perfilList.get(0));
-            newEntity.setUbicacionRestaurante(null);            
+            //newEntity.setUbicacionRestaurante(null);            
             fotoService.actualizarFoto(entity.getId(), newEntity);
         });
     }
