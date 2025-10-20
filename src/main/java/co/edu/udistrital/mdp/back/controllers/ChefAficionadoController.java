@@ -24,7 +24,7 @@ public class ChefAficionadoController {
 
     @GetMapping
     public ResponseEntity<List<ChefAficionadoEntity>> getAllChefAficionados() {
- TED).build();
+        return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
     }
 
     @GetMapping("/{id}")
