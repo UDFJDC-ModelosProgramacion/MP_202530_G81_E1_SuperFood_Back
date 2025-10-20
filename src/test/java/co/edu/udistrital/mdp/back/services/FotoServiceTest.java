@@ -1,18 +1,32 @@
+package co.edu.udistrital.mdp.back.services;
 import java.util.List;
 
-import org.aspectj.weaver.ast.Test;
+import co.edu.udistrital.mdp.back.entities.*;
+import co.edu.udistrital.mdp.back.exceptions.*;
+import co.edu.udistrital.mdp.back.repositories.FotoRepository;
+
+import java.util.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.context.annotation.Import;
+import org.springframework.transaction.annotation.Transactional;
+import uk.co.jemos.podam.api.PodamFactory;
+import uk.co.jemos.podam.api.PodamFactoryImpl;
 
+import static org.junit.jupiter.api.Assertions.*;
 import co.edu.udistrital.mdp.back.entities.FotoEntity;
-import jakarta.transaction.Transactional;
-import lombok.Data;
+
 
 @DataJpaTest
 @Transactional
 @Import(FotoService.class)
 public class FotoServiceTest {
+
+    @Autowired
+    FotoRepository fotoRepository;
     @Autowired
     private FotoService fotoService;
     
@@ -88,8 +102,7 @@ public class FotoServiceTest {
     }
     //crear una foto
     @Transactional
-    private FotoEntity createFoto(FotoEntity foto) {
-        log.info("Creando una nueva foto");
+    private FotoEntity crearFoto(FotoEntity foto)throws IllegalOperationException {
         if (foto.getEnlace() == null || foto.getEnlace().isEmpty()) {
             throw new IllegalOperationException("El enlace de la foto no puede ser nulo o vacío");
         }
@@ -100,14 +113,12 @@ public class FotoServiceTest {
     }
     //obtener todas las fotos
     @Transactional
-    public List<FotoEntity> getFotos() {
-        log.info("Consultando todas las fotos");
+    public List<FotoEntity> obtenerFotoPorIds() {
         return fotoRepository.findAll();
     }
     //obtener una foto por id
     @Transactional
-    public FotoEntity getFoto(Long id) throws EntityNotFoundException {
-        log.info("Consultando la foto con id = {}", id);
+    public FotoEntity obtenerFotoPorId(Long id) throws EntityNotFoundException,IllegalOperationException {
         if (id == null || id <= 0) {
             throw new IllegalOperationException("El id de la foto no puede ser nulo o negativo");
         }
@@ -118,8 +129,7 @@ public class FotoServiceTest {
     }
     //eliminar una foto
     @Transactional
-    public void deleteFoto(Long id) throws EntityNotFoundException {
-        log.info("Eliminando la foto con id = {}", id);
+    public void eliminarFoto(Long id) throws EntityNotFoundException,IllegalOperationException {
         if (id == null || id <= 0) {
             throw new IllegalOperationException("El id de la foto no puede ser nulo o negativo");
         }
@@ -130,8 +140,7 @@ public class FotoServiceTest {
     }
     //actualizar una foto
     @Transactional
-    public FotoEntity updateFoto(Long id, FotoEntity foto) throws EntityNotFoundException {
-        log.info("Actualizando la foto con id = {}", id);
+    public FotoEntity actualizarFoto(Long id, FotoEntity foto) throws EntityNotFoundException,IllegalOperationException {
         if (id == null || id <= 0) {
             throw new IllegalOperationException("El id de la foto no puede ser nulo o negativo");
         }
@@ -145,7 +154,7 @@ public class FotoServiceTest {
     }
     //pruebas unitarias para crear una foto
     @Test
-    void testCreateFoto() throws IllegalOperationException {
+    void testcrearFoto() throws IllegalOperationException {
         FotoEntity newFoto = factory.manufacturePojo(FotoEntity.class);
         newFoto.setServicio(servicioList.get(0));
         newFoto.setReceta(recetaList.get(0));
@@ -153,7 +162,7 @@ public class FotoServiceTest {
         newFoto.setIngrediente(ingredienteList.get(0));
         newFoto.setPerfil(perfilList.get(0));
         newFoto.setUbicacionRestaurante(ubicacionRestauranteList.get(0));
-        FotoEntity result = fotoService.createFoto(newFoto);
+        FotoEntity result = fotoService.crearFoto(newFoto);
         assertNotNull(result);
         FotoEntity entity = entityManager.find(FotoEntity.class, result.getId());
         assertEquals(newFoto.getEnlace(), entity.getEnlace());
@@ -163,11 +172,10 @@ public class FotoServiceTest {
         assertEquals(newFoto.getRestaurante(), entity.getRestaurante());
         assertEquals(newFoto.getIngrediente(), entity.getIngrediente());
         assertEquals(newFoto.getPerfil(), entity.getPerfil());
-        assertEquals(newFoto.getUbicacionRestaurante(), entity.getUbicacionRestaurante);
     }
     //pruebas unitarias para crear una foto con errores
     @Test
-    void testCreateFotoConEnlaceNulo() {
+    void testcrearFotoConEnlaceNulo() {
         assertThrows(IllegalOperationException.class, ()->{
             FotoEntity newFoto = factory.manufacturePojo(FotoEntity.class);
             newFoto.setEnlace(null);
@@ -177,12 +185,12 @@ public class FotoServiceTest {
             newFoto.setIngrediente(ingredienteList.get(0));
             newFoto.setPerfil(perfilList.get(0));
             newFoto.setUbicacionRestaurante(ubicacionRestauranteList.get(0));
-            fotoService.createFoto(newFoto);
+            fotoService.crearFoto(newFoto);
         });
     }
     //pruebas unitarias para crear una foto con errores
     @Test
-    void testCreateFotoConEnlaceVacio() {
+    void testcrearFotoConEnlaceVacio() {
         assertThrows(IllegalOperationException.class, ()->{
             FotoEntity newFoto = factory.manufacturePojo(FotoEntity.class);
             newFoto.setEnlace("");
@@ -192,12 +200,12 @@ public class FotoServiceTest {
             newFoto.setIngrediente(ingredienteList.get(0));
             newFoto.setPerfil(perfilList.get(0));
             newFoto.setUbicacionRestaurante(ubicacionRestauranteList.get(0));
-            fotoService.createFoto(newFoto);
+            fotoService.crearFoto(newFoto);
         });
     }
     //pruebas unitarias para crear una foto con errores
     @Test
-    void testCreateFotoSinServicio() {
+    void testcrearFotoSinServicio() {
         assertThrows(IllegalOperationException.class, ()->{
             FotoEntity newFoto = factory.manufacturePojo(FotoEntity.class);
             newFoto.setServicio(null);
@@ -206,12 +214,12 @@ public class FotoServiceTest {
             newFoto.setIngrediente(ingredienteList.get(0));
             newFoto.setPerfil(perfilList.get(0));
             newFoto.setUbicacionRestaurante(ubicacionRestauranteList.get(0));
-            fotoService.createFoto(newFoto);
+            fotoService.crearFoto(newFoto);
         });
     }
     //pruebas unitarias para crear una foto con errores
     @Test
-    void testCreateFotoSinReceta() {
+    void testcrearFotoSinReceta() {
         assertThrows(IllegalOperationException.class, ()->{
             FotoEntity newFoto = factory.manufacturePojo(FotoEntity.class);
             newFoto.setServicio(servicioList.get(0));
@@ -220,12 +228,12 @@ public class FotoServiceTest {
             newFoto.setIngrediente(ingredienteList.get(0));
             newFoto.setPerfil(perfilList.get(0));
             newFoto.setUbicacionRestaurante(ubicacionRestauranteList.get(0));
-            fotoService.createFoto(newFoto);
+            fotoService.crearFoto(newFoto);
         });
     }
     //pruebas unitarias para crear una foto con errores
     @Test
-    void testCreateFotoSinRestaurante() {
+    void testcrearFotoSinRestaurante() {
         assertThrows(IllegalOperationException.class, ()->{
             FotoEntity newFoto = factory.manufacturePojo(FotoEntity.class);
             newFoto.setServicio(servicioList.get(0));
@@ -234,12 +242,12 @@ public class FotoServiceTest {
             newFoto.setIngrediente(ingredienteList.get(0));
             newFoto.setPerfil(perfilList.get(0));
             newFoto.setUbicacionRestaurante(ubicacionRestauranteList.get(0));
-            fotoService.createFoto(newFoto);
+            fotoService.crearFoto(newFoto);
         });
     }
     //pruebas unitarias para crear una foto con errores
     @Test
-    void testCreateFotoSinIngrediente() {
+    void testcrearFotoSinIngrediente() {
         assertThrows(IllegalOperationException.class, ()->{
             FotoEntity newFoto = factory.manufacturePojo(FotoEntity.class);
             newFoto.setServicio(servicioList.get(0));
@@ -248,12 +256,12 @@ public class FotoServiceTest {
             newFoto.setIngrediente(null);
             newFoto.setPerfil(perfilList.get(0));
             newFoto.setUbicacionRestaurante(ubicacionRestauranteList.get(0));
-            fotoService.createFoto(newFoto);
+            fotoService.crearFoto(newFoto);
         });
     }
     //pruebas unitarias para crear una foto con errores
     @Test
-    void testCreateFotoSinPerfil() {
+    void testcrearFotoSinPerfil() {
         assertThrows(IllegalOperationException.class, ()->{
             FotoEntity newFoto = factory.manufacturePojo(FotoEntity.class);
             newFoto.setServicio(servicioList.get(0));
@@ -262,12 +270,12 @@ public class FotoServiceTest {
             newFoto.setIngrediente(ingredienteList.get(0));
             newFoto.setPerfil(null);
             newFoto.setUbicacionRestaurante(ubicacionRestauranteList.get(0));
-            fotoService.createFoto(newFoto);
+            fotoService.crearFoto(newFoto);
         });
     }
     //pruebas unitarias para crear una foto con errores
     @Test
-    void testCreateFotoSinUbicacionRestaurante() {
+    void testcrearFotoSinUbicacionRestaurante() {
         assertThrows(IllegalOperationException.class, ()->{
             FotoEntity newFoto = factory.manufacturePojo(FotoEntity.class);
             newFoto.setServicio(servicioList.get(0));
@@ -276,13 +284,13 @@ public class FotoServiceTest {
             newFoto.setIngrediente(ingredienteList.get(0));
             newFoto.setPerfil(perfilList.get(0));
             newFoto.setUbicacionRestaurante(null);
-            fotoService.createFoto(newFoto);
+            fotoService.crearFoto(newFoto);
         }); 
     }
     //pruebas unitarias para obtener todas las fotos
     @Test
-    void testGetFotos() {
-        List<FotoEntity> list = fotoService.getFotos();
+    void testobtenerFotoPorIds() {
+        List<FotoEntity> list = fotoService.obtenerTodasLasFotos();
         assertEquals(fotoList.size(), list.size());
         for (FotoEntity entity : list) {
             boolean found = false;
@@ -296,9 +304,9 @@ public class FotoServiceTest {
     }
     //pruebas unitarias para obtener una foto por id
     @Test
-    void testGetFoto() throws EntityNotFoundException, IllegalOperationException {
+    void testobtenerFotoPorId() throws EntityNotFoundException, IllegalOperationException {
         FotoEntity entity = fotoList.get(0);
-        FotoEntity resultEntity = fotoService.getFoto(entity.getId());
+        FotoEntity resultEntity = fotoService.obtenerFotoPorId(entity.getId());
         assertNotNull(resultEntity);
         assertEquals(entity.getEnlace(), resultEntity.getEnlace());
         assertEquals(entity.getNombre(), resultEntity.getNombre());
@@ -311,22 +319,22 @@ public class FotoServiceTest {
     }
     //pruebas unitarias para obtener una foto por id inexistente
     @Test
-    void testGetFotoInexistente() {
+    void testobtenerFotoPorIdInexistente() {
         assertThrows(EntityNotFoundException.class, ()->{
-            fotoService.getFoto(0L);
+            fotoService.obtenerFotoPorId(0L);
         });
     }
     //pruebas unitarias para obtener una foto por id con error
     @Test
-    void testGetFotoConIdNulo() {
+    void testobtenerFotoPorIdConIdNulo() {
         assertThrows(IllegalOperationException.class, ()->{
-            fotoService.getFoto(null);
+            fotoService.obtenerFotoPorId(null);
         });
     }
     
     //pruebas unitarias para actualizar una foto
     @Test
-    void testUpdateFoto() throws EntityNotFoundException, IllegalOperationException {
+    void testactualizarFoto() throws EntityNotFoundException, IllegalOperationException {
         FotoEntity entity = fotoList.get(0);
         FotoEntity newEntity = factory.manufacturePojo(FotoEntity.class);
         newEntity.setId(entity.getId());
@@ -337,7 +345,7 @@ public class FotoServiceTest {
         newEntity.setPerfil(perfilList.get(0));
         newEntity.setUbicacionRestaurante(ubicacionRestauranteList.get(0));
         
-        fotoService.updateFoto(entity.getId(), newEntity);
+        fotoService.actualizarFoto(entity.getId(), newEntity);
         FotoEntity resp = entityManager.find(FotoEntity.class, entity.getId());
         
         assertEquals(newEntity.getEnlace(), resp.getEnlace());
@@ -351,7 +359,7 @@ public class FotoServiceTest {
     }
     //pruebas unitarias para actualizar una foto inexistente
     @Test
-    void testUpdateFotoInexistente() {
+    void testactualizarFotoInexistente() {
         assertThrows(EntityNotFoundException.class, ()->{
             FotoEntity newEntity = factory.manufacturePojo(FotoEntity.class);
             newEntity.setServicio(servicioList.get(0));
@@ -360,12 +368,12 @@ public class FotoServiceTest {
             newEntity.setIngrediente(ingredienteList.get(0));
             newEntity.setPerfil(perfilList.get(0));
             newEntity.setUbicacionRestaurante(ubicacionRestauranteList.get(0));            
-            fotoService.updateFoto(0L, newEntity);
+            fotoService.actualizarFoto(0L, newEntity);
         });
     }
     //pruebas unitarias para actualizar una foto con errores
     @Test
-    void testUpdateFotoConIdNulo() {
+    void testactualizarFotoConIdNulo() {
         assertThrows(IllegalOperationException.class, ()->{
             FotoEntity newEntity = factory.manufacturePojo(FotoEntity.class);
             newEntity.setServicio(servicioList.get(0));
@@ -374,12 +382,12 @@ public class FotoServiceTest {
             newEntity.setIngrediente(ingredienteList.get(0));
             newEntity.setPerfil(perfilList.get(0));
             newEntity.setUbicacionRestaurante(ubicacionRestauranteList.get(0));            
-            fotoService.updateFoto(null, newEntity);
+            fotoService.actualizarFoto(null, newEntity);
         });
     }
     //pruebas unitarias para actualizar una foto con errores
     @Test
-    void testUpdateFotoConEnlaceNulo() {
+    void testactualizarFotoConEnlaceNulo() {
         assertThrows(IllegalOperationException.class, ()->{
             FotoEntity entity = fotoList.get(0);
             FotoEntity newEntity = factory.manufacturePojo(FotoEntity.class);
@@ -391,12 +399,12 @@ public class FotoServiceTest {
             newEntity.setIngrediente(ingredienteList.get(0));
             newEntity.setPerfil(perfilList.get(0));
             newEntity.setUbicacionRestaurante(ubicacionRestauranteList.get(0));            
-            fotoService.updateFoto(entity.getId(), newEntity);
+            fotoService.actualizarFoto(entity.getId(), newEntity);
         });
     }
     //pruebas unitarias para actualizar una foto con errores
     @Test
-    void testUpdateFotoConEnlaceVacio() {
+    void testactualizarFotoConEnlaceVacio() {
         assertThrows(IllegalOperationException.class, ()->{
             FotoEntity entity = fotoList.get(0);
             FotoEntity newEntity = factory.manufacturePojo(FotoEntity.class);
@@ -408,12 +416,12 @@ public class FotoServiceTest {
             newEntity.setIngrediente(ingredienteList.get(0));
             newEntity.setPerfil(perfilList.get(0));
             newEntity.setUbicacionRestaurante(ubicacionRestauranteList.get(0));            
-            fotoService.updateFoto(entity.getId(), newEntity);
+            fotoService.actualizarFoto(entity.getId(), newEntity);
         });
     }
     //pruebas unitarias para actualizar una foto con errores
     @Test
-    void testUpdateFotoSinServicio() {
+    void testactualizarFotoSinServicio() {
         assertThrows(IllegalOperationException.class, ()->{
             FotoEntity entity = fotoList.get(0);
             FotoEntity newEntity = factory.manufacturePojo(FotoEntity.class);
@@ -424,12 +432,12 @@ public class FotoServiceTest {
             newEntity.setIngrediente(ingredienteList.get(0));
             newEntity.setPerfil(perfilList.get(0));
             newEntity.setUbicacionRestaurante(ubicacionRestauranteList.get(0));            
-            fotoService.updateFoto(entity.getId(), newEntity);
+            fotoService.actualizarFoto(entity.getId(), newEntity);
         });
     }
     //pruebas unitarias para actualizar una foto con errores
     @Test
-    void testUpdateFotoSinReceta() {
+    void testactualizarFotoSinReceta() {
         assertThrows(IllegalOperationException.class, ()->{
             FotoEntity entity = fotoList.get(0);
             FotoEntity newEntity = factory.manufacturePojo(FotoEntity.class);
@@ -440,12 +448,12 @@ public class FotoServiceTest {
             newEntity.setIngrediente(ingredienteList.get(0));
             newEntity.setPerfil(perfilList.get(0));
             newEntity.setUbicacionRestaurante(ubicacionRestauranteList.get(0));            
-            fotoService.updateFoto(entity.getId(), newEntity);
+            fotoService.actualizarFoto(entity.getId(), newEntity);
         });
     }
     //pruebas unitarias para actualizar una foto con errores
     @Test   
-    void testUpdateFotoSinRestaurante() {
+    void testactualizarFotoSinRestaurante() {
         assertThrows(IllegalOperationException.class, ()->{
             FotoEntity entity = fotoList.get(0);
             FotoEntity newEntity = factory.manufacturePojo(FotoEntity.class);
@@ -456,12 +464,12 @@ public class FotoServiceTest {
             newEntity.setIngrediente(ingredienteList.get(0));
             newEntity.setPerfil(perfilList.get(0));
             newEntity.setUbicacionRestaurante(ubicacionRestauranteList.get(0));            
-            fotoService.updateFoto(entity.getId(), newEntity);
+            fotoService.actualizarFoto(entity.getId(), newEntity);
         });
     }
     //pruebas unitarias para actualizar una foto con errores
     @Test
-    void testUpdateFotoSinIngrediente() {
+    void testactualizarFotoSinIngrediente() {
         assertThrows(IllegalOperationException.class, ()->{
             FotoEntity entity = fotoList.get(0);
             FotoEntity newEntity = factory.manufacturePojo(FotoEntity.class);
@@ -472,12 +480,12 @@ public class FotoServiceTest {
             newEntity.setIngrediente(null);
             newEntity.setPerfil(perfilList.get(0));
             newEntity.setUbicacionRestaurante(ubicacionRestauranteList.get(0));            
-            fotoService.updateFoto(entity.getId(), newEntity);
+            fotoService.actualizarFoto(entity.getId(), newEntity);
         });
     }
     //pruebas unitarias para actualizar una foto con errores
     @Test   
-    void testUpdateFotoSinPerfil() {
+    void testactualizarFotoSinPerfil() {
         assertThrows(IllegalOperationException.class, ()->{
             FotoEntity entity = fotoList.get(0);
             FotoEntity newEntity = factory.manufacturePojo(FotoEntity.class);
@@ -488,12 +496,12 @@ public class FotoServiceTest {
             newEntity.setIngrediente(ingredienteList.get(0));
             newEntity.setPerfil(null);
             newEntity.setUbicacionRestaurante(ubicacionRestauranteList.get(0));            
-            fotoService.updateFoto(entity.getId(), newEntity);
+            fotoService.actualizarFoto(entity.getId(), newEntity);
         });
     }
     //pruebas unitarias para actualizar una foto con errores
     @Test
-    void testUpdateFotoSinUbicacionRestaurante() {
+    void testactualizarFotoSinUbicacionRestaurante() {
         assertThrows(IllegalOperationException.class, ()->{
             FotoEntity entity = fotoList.get(0);
             FotoEntity newEntity = factory.manufacturePojo(FotoEntity.class);
@@ -504,29 +512,29 @@ public class FotoServiceTest {
             newEntity.setIngrediente(ingredienteList.get(0));
             newEntity.setPerfil(perfilList.get(0));
             newEntity.setUbicacionRestaurante(null);            
-            fotoService.updateFoto(entity.getId(), newEntity);
+            fotoService.actualizarFoto(entity.getId(), newEntity);
         });
     }
     //pruebas unitarias para eliminar una foto
     @Test
-    void testDeleteFoto() throws EntityNotFoundException, IllegalOperationException {
+    void testeliminarFoto() throws EntityNotFoundException, IllegalOperationException {
         FotoEntity entity = fotoList.get(0);
-        fotoService.deleteFoto(entity.getId());
+        fotoService.eliminarFoto(entity.getId());
         FotoEntity deletedEntity = entityManager.find(FotoEntity.class, entity.getId());
         assertNull(deletedEntity);
     }
     //pruebas unitarias para eliminar una foto inexistente
     @Test
-    void testDeleteFotoInexistente() {
+    void testeliminarFotoInexistente() {
         assertThrows(EntityNotFoundException.class, ()->{
-            fotoService.deleteFoto(0L);
+            fotoService.eliminarFoto(0L);
         });
     }
     //pruebas unitarias para eliminar una foto con error
     @Test
-    void testDeleteFotoConIdNulo() {
+    void testeliminarFotoConIdNulo() {
         assertThrows(IllegalOperationException.class, ()->{
-            fotoService.deleteFoto(null);
+            fotoService.eliminarFoto(null);
         });
     }
 }

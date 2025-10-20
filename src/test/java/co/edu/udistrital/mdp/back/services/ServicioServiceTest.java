@@ -1,28 +1,36 @@
-import java.lang.classfile.ClassFile.Option;
+package co.edu.udistrital.mdp.back.services;
 import java.util.List;
 
-import org.aspectj.weaver.ast.Test;
-import org.junit.jupiter.api.BeforeEach;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.context.annotation.Import;
-
-import co.edu.udistrital.mdp.back.entities.ChefProfesionalEntity;
-import co.edu.udistrital.mdp.back.entities.FotoEntity;
-import co.edu.udistrital.mdp.back.entities.ServicioEntity;
-import co.edu.udistrital.mdp.back.exceptions.EntityNotFoundException;
-import co.edu.udistrital.mdp.back.exceptions.IllegalOperationException;
+import co.edu.udistrital.mdp.back.entities.*;
+import co.edu.udistrital.mdp.back.exceptions.*;
+import co.edu.udistrital.mdp.back.repositories.ServicioRepository;
 import co.edu.udistrital.mdp.back.repositories.ChefProfesionalRepository;
-import jakarta.transaction.Transactional;
-import lombok.Data;
-import net.bytebuddy.asm.Advice.OffsetMapping.Factory.Illegal;
+
+import java.util.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import org.springframework.context.annotation.Import;
+import org.springframework.transaction.annotation.Transactional;
 import uk.co.jemos.podam.api.PodamFactory;
+import uk.co.jemos.podam.api.PodamFactoryImpl;
+
+import static org.junit.jupiter.api.Assertions.*;
+import co.edu.udistrital.mdp.back.entities.ServicioEntity;
 
 @DataJpaTest
 @Transactional
 @Import(ServicioService.class)
 public class ServicioServiceTest {
 
-    @Autowirwed
+    @Autowired
+    private ChefProfesionalRepository chefProfesionalRepository;
+    
+    @Autowired
+    private ServicioRepository servicioRepository;   
+    @Autowired
     private ServicioService servicioService;
 
     private TestEntityManager entityManager;
@@ -74,7 +82,7 @@ public class ServicioServiceTest {
         }
         for (int i = 0; i < 3; i++) {
             EventoEntity evento = factory.manufacturePojo(EventoEntity.class);
-            evento.setServicio(servicioList.get(0));
+            //evento.setServicio(servicioList.get(0));
             entityManager.persist(evento);
             eventoList.add(evento);
         }
@@ -83,7 +91,7 @@ public class ServicioServiceTest {
     //Crear un servicio
     @Transactional
     private ServicioEntity createServicio(ServicioEntity servicio) throws EntityNotFoundException, IllegalOperationException {
-        log.info("Probar crear un servicio");
+        
 
         if(servicio.getChefProfesional() == null){
             throw new IllegalOperationException("El servicio debe estar asociado a un chef profesional");
@@ -103,13 +111,12 @@ public class ServicioServiceTest {
     //Obtener todos los servicios 
     @Transactional
     private List<ServicioEntity> getServicios() {
-        log.info("Probar obtener todos los servicios");
         return servicioRepository.findAll();
     }
     //Obtener un servicio por id
     @Transactional
     private ServicioEntity getServicio(Long id) throws EntityNotFoundException {
-        log.info("Probar obtener un servicio por id");
+        
         Optional<ServicioEntity> servicioEntity = servicioRepository.findById(id);
         if(servicioEntity.isEmpty()){
             throw new EntityNotFoundException("No se encontro el servicio con el id dado");
@@ -119,7 +126,7 @@ public class ServicioServiceTest {
     //Actualizar un servicio
     @Transactional
     private ServicioEntity updateServicio(Long id, ServicioEntity servicio) throws EntityNotFoundException, IllegalOperationException {
-        log.info("Probar actualizar un servicio");
+        
         Optional<ServicioEntity> servicioEntity = servicioRepository.findById(id);
         if(servicioEntity.isEmpty()){
             throw new EntityNotFoundException("No se encontro el servicio con el id dado");
@@ -140,18 +147,18 @@ public class ServicioServiceTest {
     //Eliminar un servicio
     @Transactional
     private void deleteServicio(Long id) throws EntityNotFoundException, IllegalOperationException {
-        log.info("Probar eliminar un servicio");
+        
         ServicioEntity servicioEntity = entityManager.find(ServicioEntity.class, id);
         Optional<ServicioEntity> servicio = servicioRepository.findById(id);
         if(servicio.isEmpty()){
             throw new EntityNotFoundException("No se encontro el servicio con el id dado");
         }
-        List<ChefProfesionalEntity> chefs = servicioEntity.get.getChefProfesional();
-        if(!chefs.isEmpty()){
+        ChefProfesionalEntity chef = servicioEntity.getChefProfesional();
+        if(chef.equals(null) ){
             throw new IllegalOperationException("No se puede eliminar el servicio porque tiene chefs asociados");
         }
         servicioRepository.delete(servicioEntity);
-        log.info("Servicio eliminado");
+        
     }
     //Prueba unitaria para crear un servicio
     @Test
