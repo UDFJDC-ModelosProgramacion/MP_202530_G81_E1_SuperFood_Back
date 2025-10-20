@@ -22,12 +22,7 @@ public class IngredienteService {
     /**
      * Crea un nuevo ingrediente en la base de datos.
      * No puede haber dos ingredientes con el mismo nombre.
-     * Debe pertenecer al menos a  la categoria (proteína, grasa o carbohidrato).
-     *
-     * @param ingrediente Objeto ingrediente a crear.
-     * @return Ingrediente creado.
-     * @throws EntityExistsException si el nombre ya existe.
-     * @throws EntityNotFoundException si no pertenece a ningún macronutriente.
+     * Debe pertenecer al menos a  la categoria (proteína, grasa o carbohidrato)
      */
     @Transactional
     public IngredienteEntity crearIngrediente(IngredienteEntity ingrediente) {
@@ -57,16 +52,7 @@ public class IngredienteService {
     /**
      * Modifica un ingrediente existente.
      * No puede cambiar su nombre a uno que ya esté en uso.
-     * Debe seguir teniendo al menos un macronutriente.
-     *
-     * @param id ID del ingrediente a modificar.
-     * @param nuevoNombre Nuevo nombre.
-     * @param proteina Nuevo valor para esProteina.
-     * @param grasa Nuevo valor para esGrasa.
-     * @param carbohidrato Nuevo valor para esCarbohidrato.
-     * @return Ingrediente actualizado.
-     * @throws EntityNotFoundException si no existe el ingrediente.
-     * @throws IllegalStateException si ya existe otro ingrediente con el mismo nombre.
+     * Debe seguir teniendo al menos un macronutriente
      */
     @Transactional
     public IngredienteEntity modificarIngrediente(Long id, String nuevoNombre,
@@ -97,12 +83,7 @@ public class IngredienteService {
         return ingredienteRepository.save(ingrediente);
     }
 
-    /**
-     * Consulta un ingrediente por nombre.
-     * @param nombre Nombre del ingrediente.
-     * @return Ingrediente encontrado.
-     * @throws EntityNotFoundException si no existe.
-     */
+    //consulta un ingrediente por nombre
     @Transactional
     public IngredienteEntity consultarPorNombre(String nombre) {
         List<IngredienteEntity> ingredientes = ingredienteRepository.findByNombre(nombre);
@@ -112,11 +93,7 @@ public class IngredienteService {
         return ingredientes.get(0);
     }
 
-    /**
-     * Consulta todos los ingredientes existentes.
-     *
-     * @return Lista de todos los ingredientes.
-     */
+    // Consulta todos los ingredientes existentes.
     @Transactional
     public List<IngredienteEntity> listarTodos() {
         return ingredienteRepository.findAll();
