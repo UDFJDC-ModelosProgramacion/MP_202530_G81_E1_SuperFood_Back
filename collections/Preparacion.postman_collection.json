@@ -1,0 +1,162 @@
+{
+	"info": {
+		"_postman_id": "24ba42d9-75dc-47b0-b8a5-1058b18effe1",
+		"name": "Preparacion",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "48657880",
+		"_collection_link": "https://sebasacvdo-3036790.postman.co/workspace/sebasacvdo's-Workspace~e2e05de0-3312-487d-838b-ffb94d5c39aa/collection/48657880-24ba42d9-75dc-47b0-b8a5-1058b18effe1?action=share&source=collection_link&creator=48657880"
+	},
+	"item": [
+		{
+			"name": "Crear o actualizar preparacion",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/preparaciones",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"preparaciones"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Crear o actualizar preparacion",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/preparaciones",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"preparaciones"
+							]
+						}
+					},
+					"_postman_previewlanguage": "",
+					"header": [],
+					"cookie": [],
+					"body": ""
+				},
+				{
+					"name": "Crear o actualizar preparacion",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/preparaciones",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"preparaciones"
+							]
+						}
+					},
+					"_postman_previewlanguage": "",
+					"header": [],
+					"cookie": [],
+					"body": ""
+				},
+				{
+					"name": "Crear o actualizar preparacion",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/preparaciones",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"preparaciones"
+							]
+						}
+					},
+					"_postman_previewlanguage": "",
+					"header": [],
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "Consultar todas las preparaciones",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": [
+				{
+					"name": "Consultar todas las preparaciones",
+					"originalRequest": {
+						"method": "GET",
+						"header": []
+					},
+					"_postman_previewlanguage": "",
+					"header": [],
+					"cookie": [],
+					"body": ""
+				},
+				{
+					"name": "Consultar todas las preparaciones",
+					"originalRequest": {
+						"method": "GET",
+						"header": []
+					},
+					"_postman_previewlanguage": "",
+					"header": [],
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "Consultar preparacion por nombre",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/preparaciones/nombre/Saltear%20verduras\n",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"preparaciones",
+						"nombre",
+						"Saltear%20verduras\n"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Consultar preparacion por nombre",
+					"originalRequest": {
+						"method": "GET",
+						"header": []
+					},
+					"_postman_previewlanguage": "",
+					"header": [],
+					"cookie": [],
+					"body": ""
+				},
+				{
+					"name": "Consultar preparacion por nombre",
+					"originalRequest": {
+						"method": "GET",
+						"header": []
+					},
+					"_postman_previewlanguage": "",
+					"header": [],
+					"cookie": [],
+					"body": ""
+				}
+			]
+		}
+	]
+}

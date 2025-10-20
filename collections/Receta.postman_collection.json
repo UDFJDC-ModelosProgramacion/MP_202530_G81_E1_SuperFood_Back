@@ -1,0 +1,435 @@
+{
+	"info": {
+		"_postman_id": "7b0ac58d-029b-4f6d-98b9-24351fe38102",
+		"name": "Receta",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "48657880",
+		"_collection_link": "https://sebasacvdo-3036790.postman.co/workspace/sebasacvdo's-Workspace~e2e05de0-3312-487d-838b-ffb94d5c39aa/collection/48657880-7b0ac58d-029b-4f6d-98b9-24351fe38102?action=share&source=collection_link&creator=48657880"
+	},
+	"item": [
+		{
+			"name": "Crear una receta",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"nombre\": \"Lasaña de carne\",\n  \"descripcion\": \"Capa de pasta con carne y bechamel\",\n  \"tiempoPreparacion\": 60,\n  \"porciones\": 6,\n  \"idsPreparaciones\": [1, 3, 5]\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/Recetas",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"Recetas"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Crera una receta",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nombre\": \"Lasaña de carne\",\n  \"descripcion\": \"Capa de pasta con carne y bechamel\",\n  \"tiempoPreparacion\": 60,\n  \"porciones\": 6,\n  \"idsPreparaciones\": [1, 3, 5]\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/Recetas",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"Recetas"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "",
+					"header": [],
+					"cookie": [
+						{
+							"expires": "Invalid Date",
+							"domain": "",
+							"path": ""
+						}
+					],
+					"body": "{\n  \"id\": 10,\n  \"nombre\": \"Lasaña de carne\",\n  \"descripcion\": \"Capa de pasta con carne y bechamel\",\n  \"tiempoPreparacion\": 60,\n  \"porciones\": 6,\n  \"preparaciones\": [\n    {\n      \"id\": 1,\n      \"descripcion\": \"Preparar la salsa boloñesa\"\n    },\n    {\n      \"id\": 3,\n      \"descripcion\": \"Armar las capas de la lasaña\"\n    },\n    {\n      \"id\": 5,\n      \"descripcion\": \"Hornear por 30 minutos\"\n    }\n  ]\n}\n"
+				}
+			]
+		},
+		{
+			"name": "Obtener todas las recetas",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{baseURL}}/recetas/{{id}}",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"recetas",
+						"{{id}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Obtener todas las recetas",
+					"originalRequest": {
+						"method": "GET",
+						"header": []
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "",
+					"header": [],
+					"cookie": [
+						{
+							"expires": "Invalid Date",
+							"domain": "",
+							"path": ""
+						}
+					],
+					"body": "[\n  {\n    \"id\": 10,\n    \"nombre\": \"Lasaña de carne\",\n    \"descripcion\": \"Capa de pasta con carne y bechamel\",\n    \"tiempoPreparacion\": 60,\n    \"porciones\": 6\n  },\n  {\n    \"id\": 11,\n    \"nombre\": \"Arepas de queso\",\n    \"descripcion\": \"Tradicionales de maíz y queso\",\n    \"tiempoPreparacion\": 20,\n    \"porciones\": 4\n  }\n]\n"
+				}
+			]
+		},
+		{
+			"name": "Obtener una receta por ID",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{baseURL}}/recetas/{{id}}",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"recetas",
+						"{{id}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Obtener una receta por ID",
+					"originalRequest": {
+						"method": "GET",
+						"header": []
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "",
+					"header": [],
+					"cookie": [
+						{
+							"expires": "Invalid Date",
+							"domain": "",
+							"path": ""
+						}
+					],
+					"body": "{\n  \"id\": 10,\n  \"nombre\": \"Lasaña de carne\",\n  \"descripcion\": \"Capa de pasta con carne y bechamel\",\n  \"tiempoPreparacion\": 60,\n  \"porciones\": 6,\n  \"preparaciones\": [\n    {\n      \"id\": 1,\n      \"descripcion\": \"Preparar la salsa boloñesa\"\n    },\n    {\n      \"id\": 3,\n      \"descripcion\": \"Armar las capas de la lasaña\"\n    }\n  ]\n}\n"
+				}
+			]
+		},
+		{
+			"name": "Actualizar Receta",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"nombre\": \"Lasaña vegetal\",\n  \"descripcion\": \"Versión sin carne con espinaca y ricotta\",\n  \"tiempoPreparacion\": 50,\n  \"porciones\": 6,\n  \"idsPreparaciones\": [2, 4]\n}\n"
+				},
+				"url": {
+					"raw": "{{baseURL}}/recetas/{{id}}",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"recetas",
+						"{{id}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Actualizar Receta",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nombre\": \"Lasaña vegetal\",\n  \"descripcion\": \"Versión sin carne con espinaca y ricotta\",\n  \"tiempoPreparacion\": 50,\n  \"porciones\": 6,\n  \"idsPreparaciones\": [2, 4]\n}\n"
+						},
+						"url": {
+							"raw": "{{baseURL}}/Recetas",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"Recetas"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "",
+					"header": [],
+					"cookie": [
+						{
+							"expires": "Invalid Date",
+							"domain": "",
+							"path": ""
+						}
+					],
+					"body": "{\n  \"id\": 10,\n  \"nombre\": \"Lasaña vegetal\",\n  \"descripcion\": \"Versión sin carne con espinaca y ricotta\",\n  \"tiempoPreparacion\": 50,\n  \"porciones\": 6,\n  \"preparaciones\": [\n    {\n      \"id\": 2,\n      \"descripcion\": \"Saltear las verduras\"\n    },\n    {\n      \"id\": 4,\n      \"descripcion\": \"Montar capas con espinaca y ricotta\"\n    }\n  ]\n}\n"
+				}
+			]
+		},
+		{
+			"name": "Eliminar una Receta",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/recetas/{{id}}",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"recetas",
+						"{{id}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Eliminar una Receta",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/recetas/{{id}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"recetas",
+								"{{id}}"
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": "",
+					"header": [],
+					"cookie": [
+						{
+							"expires": "Invalid Date",
+							"domain": "",
+							"path": ""
+						}
+					],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "Obtener Receta inexistente",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/recetas/0",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"recetas",
+						"0"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Obtener Receta inexistente",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/recetas/0",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"recetas",
+								"0"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "",
+					"header": [],
+					"cookie": [
+						{
+							"expires": "Invalid Date",
+							"domain": "",
+							"path": ""
+						}
+					],
+					"body": "{\n  \"error\": \"No se encontró la receta con ID 0\"\n}\n"
+				}
+			]
+		},
+		{
+			"name": "Actualizar receta inexistente",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/recetas/0",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"recetas",
+						"0"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Actualizar receta inexistente",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/recetas/0",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"recetas",
+								"0"
+							]
+						}
+					},
+					"_postman_previewlanguage": "",
+					"header": [],
+					"cookie": [
+						{
+							"expires": "Invalid Date",
+							"domain": "",
+							"path": ""
+						}
+					],
+					"body": "{\n  \"error\": \"No se puede actualizar. La receta con ID 0 no existe.\"\n}\n"
+				}
+			]
+		},
+		{
+			"name": "Eliminar receta inexistente",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/recetas/0",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"recetas",
+						"0"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Eliminar receta inexistente",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/recetas/0",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"recetas",
+								"0"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "",
+					"header": [],
+					"cookie": [
+						{
+							"expires": "Invalid Date",
+							"domain": "",
+							"path": ""
+						}
+					],
+					"body": "\n{\n  \"error\": \"No se puede eliminar. La receta con ID 0 no existe.\"\n}\n"
+				}
+			]
+		}
+	]
+}

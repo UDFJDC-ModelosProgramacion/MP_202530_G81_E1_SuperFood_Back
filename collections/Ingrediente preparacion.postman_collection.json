@@ -1,0 +1,123 @@
+{
+	"info": {
+		"_postman_id": "a19b0da6-6a81-41c7-8973-13f09146d6f0",
+		"name": "Ingrediente preparacion",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "48657880",
+		"_collection_link": "https://sebasacvdo-3036790.postman.co/workspace/sebasacvdo's-Workspace~e2e05de0-3312-487d-838b-ffb94d5c39aa/collection/48657880-a19b0da6-6a81-41c7-8973-13f09146d6f0?action=share&source=collection_link&creator=48657880"
+	},
+	"item": [
+		{
+			"name": "Asociar ingrediente a una preparacion",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": [
+				{
+					"name": "Asociar ingrediente a una preparacion",
+					"originalRequest": {
+						"method": "GET",
+						"header": []
+					},
+					"_postman_previewlanguage": "",
+					"header": [],
+					"cookie": [],
+					"body": ""
+				},
+				{
+					"name": "Asociar ingrediente a una preparacion",
+					"originalRequest": {
+						"method": "GET",
+						"header": []
+					},
+					"_postman_previewlanguage": "",
+					"header": [],
+					"cookie": [],
+					"body": ""
+				},
+				{
+					"name": "Asociar ingrediente a una preparacion",
+					"originalRequest": {
+						"method": "GET",
+						"header": []
+					},
+					"_postman_previewlanguage": "",
+					"header": [],
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "Quitar ingrediente de una preparacion",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": [
+				{
+					"name": "Quitar ingrediente de una preparacion",
+					"originalRequest": {
+						"method": "GET",
+						"header": []
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "",
+					"header": [],
+					"cookie": [
+						{
+							"expires": "Invalid Date",
+							"domain": "",
+							"path": ""
+						}
+					],
+					"body": "{\n  \"error\": \"No existe esta relación entre ingrediente y preparación\"\n}\n"
+				}
+			]
+		},
+		{
+			"name": "Consultar ingredientes de una preparacion",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": [
+				{
+					"name": "Consultar ingredientes de una preparacion",
+					"originalRequest": {
+						"method": "GET",
+						"header": []
+					},
+					"_postman_previewlanguage": "",
+					"header": [],
+					"cookie": [],
+					"body": ""
+				},
+				{
+					"name": "Consultar ingredientes de una preparacion",
+					"originalRequest": {
+						"method": "GET",
+						"header": []
+					},
+					"_postman_previewlanguage": "",
+					"header": [],
+					"cookie": [],
+					"body": ""
+				},
+				{
+					"name": "Consultar ingredientes de una preparacion",
+					"originalRequest": {
+						"method": "GET",
+						"header": []
+					},
+					"_postman_previewlanguage": "",
+					"header": [],
+					"cookie": [],
+					"body": ""
+				}
+			]
+		}
+	]
+}
