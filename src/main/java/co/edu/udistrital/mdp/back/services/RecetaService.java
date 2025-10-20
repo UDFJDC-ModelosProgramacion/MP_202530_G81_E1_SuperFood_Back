@@ -9,7 +9,7 @@ import co.edu.udistrital.mdp.back.entities.PreparacionEntity;
 import co.edu.udistrital.mdp.back.entities.RecetaEntity;
 import co.edu.udistrital.mdp.back.repositories.PreparacionRepository;
 import co.edu.udistrital.mdp.back.repositories.RecetaRepository;
-import jakarta.persistence.EntityNotFoundException;
+import co.edu.udistrital.mdp.back.exceptions.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 
@@ -28,10 +28,6 @@ public class RecetaService {
      * 
      * Al crear una receta se le asocian las preparaciones.
      * La receta se crea con nombre, tiempo de preparación, porciones y descripción.
-     * 
-     * @param receta Objeto con los datos básicos.
-     * @param preparaciones Lista de preparaciones que se van a asociar.
-     * @return Receta creada con sus preparaciones asociadas.
      */
     @Transactional
     public RecetaEntity crearReceta(RecetaEntity receta, List<Long> idsPreparaciones) {
@@ -45,11 +41,6 @@ public class RecetaService {
 
     /**
      * Actualizar una receta existente.
-     * 
-     * @param recetaId ID de la receta a modificar.
-     * @param nuevosDatos Datos actualizados de la receta.
-     * @param idsPreparaciones IDs de preparaciones nuevas que reemplazarán las anteriores.
-     * @return Receta actualizada.
      */
     @Transactional
     public RecetaEntity actualizarReceta(Long recetaId, RecetaEntity nuevosDatos, List<Long> idsPreparaciones) {
@@ -73,8 +64,6 @@ public class RecetaService {
      * Eliminar una receta.
      * 
      * Al eliminar una receta se eliminan sus relaciones con preparaciones.
-     * 
-     * @param recetaId ID de la receta a eliminar.
      */
     @Transactional
     public void eliminarReceta(Long recetaId) {
@@ -82,15 +71,14 @@ public class RecetaService {
                 .orElseThrow(() -> new EntityNotFoundException("Receta no encontrada con id: " + recetaId));
 
         // Romper relaciones antes de borrar
-        receta.getPreparaciones().clear();
+        if (receta.getPreparaciones() != null) {
+            receta.setPreparaciones(null);
+        }
         recetaRepository.delete(receta);
     }
 
     /**
-     * Consultar una receta por su ID.
-     * 
-     * @param recetaId ID de la receta.
-     * @return Receta encontrada.
+        Consultar una receta por su ID
      */
     @Transactional
     public RecetaEntity obtenerRecetaPorId(Long recetaId) {
@@ -100,8 +88,6 @@ public class RecetaService {
 
     /**
      * Consultar todas las recetas.
-     * 
-     * @return Lista de recetas.
      */
     @Transactional
     public List<RecetaEntity> obtenerTodasLasRecetas() {
