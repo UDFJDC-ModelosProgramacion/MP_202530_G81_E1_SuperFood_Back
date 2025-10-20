@@ -24,8 +24,7 @@ public class PreparacionEntity  extends BaseEntity{
     private RecetaEntity receta;
 
     @PodamExclude
-    @ManyToMany(mappedBy = "preparaciones")
-
+    @ManyToMany
     private List <UtensiliosEntity> utensilios = new ArrayList<>();
 
     @PodamExclude

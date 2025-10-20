@@ -19,4 +19,8 @@ public class UsuarioEntity extends BaseEntity {
     @ManyToMany()
     private List<EventoEntity> eventos = new ArrayList<>();
 
+    @PodamExclude
+    @OneToOne(mappedBy = "usuario")
+    private PerfilEntity perfil;
+
 }

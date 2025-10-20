@@ -6,9 +6,11 @@ import jakarta.persistence.ManyToMany;
 import uk.co.jemos.podam.common.PodamExclude;
 import java.util.ArrayList;
 import java.util.List;
+import lombok.Data;
 
+@Data
 @Entity
-public class ChefProfesionalEntity extends ChefAficionadoEntity {
+public class ChefProfesionalEntity extends BaseEntity {
 
     private String especialidad;
     private boolean verificado;
@@ -18,42 +20,7 @@ public class ChefProfesionalEntity extends ChefAficionadoEntity {
     private List<ServicioEntity> servicios = new ArrayList<>();
 
     @PodamExclude
-    @ManyToMany(mappedBy = "chefProfesionales")
+    @ManyToMany(mappedBy = "chefs")
     private List<RestauranteEntity> restaurantes = new ArrayList<>();
 
-    public String getEspecialidad() {
-        return especialidad;
-    }
-
-    public void setEspecialidad(String especialidad) {
-        this.especialidad = especialidad;
-    }
-
-    public boolean isVerificado() {
-        return verificado;
-    }
-
-    public void setVerificado(boolean verificado) {
-        this.verificado = verificado;
-    }
-
-    public List<ServicioEntity> getServicios() {
-        return servicios;
-    }
-
-    public void setServicios(List<ServicioEntity> servicios) {
-        this.servicios = servicios;
-    }
-
-    public List<RestauranteEntity> getRestaurantes() {
-        return restaurantes;
-    }
-
-    public void setRestaurantes(List<RestauranteEntity> restaurantes) {
-        this.restaurantes = restaurantes;
-    }
-
-    public Long getId() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
 }
