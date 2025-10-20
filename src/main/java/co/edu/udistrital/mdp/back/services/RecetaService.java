@@ -9,7 +9,7 @@ import co.edu.udistrital.mdp.back.entities.PreparacionEntity;
 import co.edu.udistrital.mdp.back.entities.RecetaEntity;
 import co.edu.udistrital.mdp.back.repositories.PreparacionRepository;
 import co.edu.udistrital.mdp.back.repositories.RecetaRepository;
-import jakarta.persistence.EntityNotFoundException;
+import co.edu.udistrital.mdp.back.exceptions.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 
@@ -71,7 +71,9 @@ public class RecetaService {
                 .orElseThrow(() -> new EntityNotFoundException("Receta no encontrada con id: " + recetaId));
 
         // Romper relaciones antes de borrar
-        receta.getPreparaciones().clear();
+        if (receta.getPreparaciones() != null) {
+            receta.setPreparaciones(null);
+        }
         recetaRepository.delete(receta);
     }
 

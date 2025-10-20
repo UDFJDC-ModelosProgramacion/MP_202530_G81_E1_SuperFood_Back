@@ -2,9 +2,7 @@ package co.edu.udistrital.mdp.back.services;
 
 import co.edu.udistrital.mdp.back.entities.PreparacionEntity;
 import co.edu.udistrital.mdp.back.entities.RecetaEntity;
-import co.edu.udistrital.mdp.back.repositories.PreparacionRepository;
-import co.edu.udistrital.mdp.back.repositories.RecetaRepository;
-import jakarta.persistence.EntityNotFoundException;
+import co.edu.udistrital.mdp.back.exceptions.EntityNotFoundException;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

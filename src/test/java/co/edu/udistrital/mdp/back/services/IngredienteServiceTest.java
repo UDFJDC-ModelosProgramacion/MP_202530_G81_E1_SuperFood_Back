@@ -14,8 +14,6 @@ import co.edu.udistrital.mdp.back.entities.IngredienteEntity;
 import co.edu.udistrital.mdp.back.repositories.IngredienteRepository;
 import jakarta.persistence.EntityExistsException;
 import jakarta.persistence.EntityNotFoundException;
-import uk.co.jemos.podam.api.PodamFactory;
-import uk.co.jemos.podam.api.PodamFactoryImpl;
 
 @DataJpaTest
 @Transactional
@@ -28,7 +26,6 @@ class IngredienteServiceTest {
     @Autowired
     private IngredienteRepository ingredienteRepository;
 
-    private final PodamFactory factory = new PodamFactoryImpl();
 
     @Test
     void testCrearIngrediente_Exitoso() {

@@ -5,8 +5,6 @@ import co.edu.udistrital.mdp.back.entities.PreparacionEntity;
 import co.edu.udistrital.mdp.back.entities.IngredientePreparacionEntity;
 import co.edu.udistrital.mdp.back.exceptions.EntityNotFoundException;
 import co.edu.udistrital.mdp.back.repositories.IngredientePreparacionRepository;
-import co.edu.udistrital.mdp.back.repositories.IngredienteRepository;
-import co.edu.udistrital.mdp.back.repositories.PreparacionRepository;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -37,12 +35,6 @@ class IngredientePreparacionServiceTest {
 
     @Autowired
     private IngredientePreparacionRepository ingredientePreparacionRepository;
-
-    @Autowired
-    private IngredienteRepository ingredienteRepository;
-
-    @Autowired
-    private PreparacionRepository preparacionRepository;
 
     private PodamFactory factory = new PodamFactoryImpl();
 
@@ -84,7 +76,7 @@ class IngredientePreparacionServiceTest {
 
     @Test
     void testQuitarIngrediente() throws EntityNotFoundException {
-        IngredientePreparacionEntity relacion = ingredientePreparacionService.asociarIngrediente(
+        ingredientePreparacionService.asociarIngrediente(
                 preparacion.getId(), ingrediente.getId(), 100.0, "1 taza");
 
         ingredientePreparacionService.quitarIngrediente(preparacion.getId(), ingrediente.getId());
@@ -102,7 +94,7 @@ class IngredientePreparacionServiceTest {
 
     @Test
     void testConsultarIngredientes() throws EntityNotFoundException {
-        IngredientePreparacionEntity relacion = ingredientePreparacionService.asociarIngrediente(
+        ingredientePreparacionService.asociarIngrediente(
                 preparacion.getId(), ingrediente.getId(), 80.0, "1 porción");
 
         List<IngredientePreparacionEntity> lista = ingredientePreparacionService.consultarIngredientes(preparacion.getId());

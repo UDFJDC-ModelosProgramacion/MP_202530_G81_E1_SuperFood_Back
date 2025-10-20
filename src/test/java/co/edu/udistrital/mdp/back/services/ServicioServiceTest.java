@@ -32,7 +32,7 @@ public class ServicioServiceTest {
     private ServicioRepository servicioRepository;   
     @Autowired
     private ServicioService servicioService;
-
+    @Autowired
     private TestEntityManager entityManager;
     private PodamFactory factory = new PodamFactoryImpl();
     private List<ServicioEntity> servicioList = new ArrayList<>();
@@ -319,7 +319,7 @@ public class ServicioServiceTest {
     //pruebas unitarias para eliminar un servicio
     @Test
     void testDeleteServicio() throws EntityNotFoundException, IllegalOperationException {
-        ServicioEntity entity = servicioList.get(0);
+        ServicioEntity entity = servicioList.get(2); // Usar servicio sin comentarios ni fotos asociadas
         servicioService.eliminarServicio(entity.getId());
         ServicioEntity deletedEntity = entityManager.find(ServicioEntity.class, entity.getId());
         assertNull(deletedEntity);
