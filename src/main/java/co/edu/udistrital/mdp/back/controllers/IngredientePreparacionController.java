@@ -18,7 +18,6 @@ public class IngredientePreparacionController {
     @Autowired
     private IngredientePreparacionService ingredientePreparacionService;
 
-    // POST Asociar un ingrediente a una preparación
     @PostMapping("/{preparacionId}/{ingredienteId}")
     public ResponseEntity<IngredientePreparacionEntity> asociarIngrediente(
             @PathVariable Long preparacionId,
@@ -31,7 +30,6 @@ public class IngredientePreparacionController {
         return ResponseEntity.status(HttpStatus.CREATED).body(relacion);
     }
 
-    // DELETE Quitar un ingrediente de una preparación
     @DeleteMapping("/{preparacionId}/{ingredienteId}")
     public ResponseEntity<Void> quitarIngrediente(
             @PathVariable Long preparacionId,
@@ -41,7 +39,6 @@ public class IngredientePreparacionController {
         return ResponseEntity.noContent().build();
     }
 
-    // GET Consultar todos los ingredientes de una preparación
     @GetMapping("/{preparacionId}")
     public ResponseEntity<List<IngredientePreparacionEntity>> consultarIngredientes(
             @PathVariable Long preparacionId) throws EntityNotFoundException {
@@ -51,15 +48,17 @@ public class IngredientePreparacionController {
         return ResponseEntity.ok(lista);
     }
 
-    // Manejador de excepciones 404
     @ExceptionHandler(EntityNotFoundException.class)
     public ResponseEntity<ErrorResponse> manejarNoEncontrado(EntityNotFoundException ex) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorResponse(ex.getMessage()));
     }
 
-    // Estructura de error simple
     static class ErrorResponse {
-        public String error;
+        private final String error;
+
+        public String getError() {
+            return error;
+        }
         public ErrorResponse(String mensaje) {
             this.error = mensaje;
         }

@@ -19,14 +19,12 @@ public class IngredienteController {
     @Autowired
     private IngredienteService ingredienteService;
 
-    // POST Crear un ingrediente
     @PostMapping
     public ResponseEntity<IngredienteEntity> crearIngrediente(@RequestBody IngredienteEntity ingrediente) {
         IngredienteEntity creado = ingredienteService.crearIngrediente(ingrediente);
         return ResponseEntity.status(HttpStatus.CREATED).body(creado);
     }
 
-    // PUT Modificar ingrediente
     @PutMapping("/{id}")
     public ResponseEntity<IngredienteEntity> modificarIngrediente(
             @PathVariable Long id,
@@ -39,21 +37,18 @@ public class IngredienteController {
         return ResponseEntity.ok(modificado);
     }
 
-    // GET Consultar por nombre
     @GetMapping("/nombre/{nombre}")
     public ResponseEntity<IngredienteEntity> consultarPorNombre(@PathVariable String nombre) {
         IngredienteEntity ingrediente = ingredienteService.consultarPorNombre(nombre);
         return ResponseEntity.ok(ingrediente);
     }
 
-    // GET Listar todos
     @GetMapping
     public ResponseEntity<List<IngredienteEntity>> listarTodos() {
         List<IngredienteEntity> lista = ingredienteService.listarTodos();
         return ResponseEntity.ok(lista);
     }
 
-    // Manejo de excepciones específicas
     @ExceptionHandler(EntityExistsException.class)
     public ResponseEntity<ErrorResponse> manejarExistente(EntityExistsException ex) {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(new ErrorResponse(ex.getMessage()));
@@ -69,9 +64,12 @@ public class IngredienteController {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ErrorResponse(ex.getMessage()));
     }
 
-    // Estructura de error simple
     static class ErrorResponse {
-        public String error;
+        private final String error;
+
+        public String getError() {
+            return error;
+        }
         public ErrorResponse(String mensaje) {
             this.error = mensaje;
         }
