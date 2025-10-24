@@ -19,7 +19,6 @@ public class PreparacionController {
     @Autowired
     private PreparacionService preparacionService;
 
-    // POST  Crear o actualizar una preparación
     @PostMapping
     public ResponseEntity<PreparacionEntity> guardarPreparacion(@RequestBody PreparacionEntity preparacion)
             throws IllegalOperationException {
@@ -27,14 +26,12 @@ public class PreparacionController {
         return ResponseEntity.status(HttpStatus.CREATED).body(guardada);
     }
 
-    // GET  Consultar todas las preparaciones
     @GetMapping
     public ResponseEntity<List<PreparacionEntity>> consultarTodas() throws EntityNotFoundException {
         List<PreparacionEntity> lista = preparacionService.consultarTodas();
         return ResponseEntity.ok(lista);
     }
 
-    // GET Consultar preparación por nombre
     @GetMapping("/nombre/{nombre}")
     public ResponseEntity<List<PreparacionEntity>> consultarPorNombre(@PathVariable String nombre)
             throws EntityNotFoundException {
@@ -42,7 +39,6 @@ public class PreparacionController {
         return ResponseEntity.ok(lista);
     }
 
-    // Manejo de excepciones 
     @ExceptionHandler(EntityNotFoundException.class)
     public ResponseEntity<ErrorResponse> manejarNoEncontrado(EntityNotFoundException ex) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorResponse(ex.getMessage()));
@@ -53,9 +49,12 @@ public class PreparacionController {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ErrorResponse(ex.getMessage()));
     }
 
-
     static class ErrorResponse {
-        public String error;
+        private final String error;
+
+        public String getError() {
+            return error;
+        }
         public ErrorResponse(String mensaje) {
             this.error = mensaje;
         }

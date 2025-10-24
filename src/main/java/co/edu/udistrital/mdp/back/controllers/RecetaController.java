@@ -55,15 +55,21 @@ public class RecetaController {
     }
 
     @ExceptionHandler(EntityNotFoundException.class)
-    public ResponseEntity<?> manejarNoEncontrado(EntityNotFoundException ex) {
+    public ResponseEntity<ErrorResponse> manejarNoEncontrado(EntityNotFoundException ex) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
                 new ErrorResponse(ex.getMessage())
         );
     }
     
     static class ErrorResponse {
-        public String error;
-        public ErrorResponse(String mensaje) { this.error = mensaje; }
+        private final String error;
+
+        public String getError() {
+            return error;
+        }
+        public ErrorResponse(String mensaje) {
+            this.error = mensaje;
+        }
     }
 }
 

@@ -31,16 +31,20 @@ public class IngredientePreparacionService {
      */
     @Transactional
     public IngredientePreparacionEntity asociarIngrediente(
-            Long preparacionId,
-            Long ingredienteId,
-            Double gramaje,
-            String porcion) throws EntityNotFoundException {
+        Long preparacionId,
+        Long ingredienteId,
+        Double gramaje,
+        String porcion) {
 
         PreparacionEntity preparacion = preparacionRepository.findById(preparacionId)
-                .orElseThrow(() -> new EntityNotFoundException("Preparación no encontrada"));
+                .orElseThrow(() -> new EntityNotFoundException("Preparación o ingrediente no encontrado"));
 
         IngredienteEntity ingrediente = ingredienteRepository.findById(ingredienteId)
-                .orElseThrow(() -> new EntityNotFoundException("Ingrediente no encontrado"));
+                .orElse(null);
+
+        if (ingrediente == null) {
+            throw new EntityNotFoundException("Preparación o ingrediente no encontrado");
+        }
 
         IngredientePreparacionEntity relacion = new IngredientePreparacionEntity();
         relacion.setPreparacion(preparacion);
@@ -50,6 +54,7 @@ public class IngredientePreparacionService {
 
         return ingredientePreparacionRepository.save(relacion);
     }
+
 
     /**
      * Quitar un ingrediente de una preparación
