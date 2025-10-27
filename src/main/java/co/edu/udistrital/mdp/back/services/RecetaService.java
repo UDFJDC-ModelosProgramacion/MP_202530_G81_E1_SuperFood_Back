@@ -16,7 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Service
 public class RecetaService {
-
+    public static final String ID_NO_ENCONTRADO = "Receta no encontrada con ID: ";
     @Autowired
     private RecetaRepository recetaRepository;
 
@@ -45,7 +45,7 @@ public class RecetaService {
     @Transactional
     public RecetaEntity actualizarReceta(Long recetaId, RecetaEntity nuevosDatos, List<Long> idsPreparaciones) {
         RecetaEntity receta = recetaRepository.findById(recetaId)
-                .orElseThrow(() -> new EntityNotFoundException("Receta no encontrada con id: " + recetaId));
+                .orElseThrow(() -> new EntityNotFoundException(ID_NO_ENCONTRADO + recetaId));
 
         receta.setNombre(nuevosDatos.getNombre());
         receta.setDescripcion(nuevosDatos.getDescripcion());
@@ -68,7 +68,7 @@ public class RecetaService {
     @Transactional
     public void eliminarReceta(Long recetaId) {
         RecetaEntity receta = recetaRepository.findById(recetaId)
-                .orElseThrow(() -> new EntityNotFoundException("Receta no encontrada con id: " + recetaId));
+                .orElseThrow(() -> new EntityNotFoundException(ID_NO_ENCONTRADO + recetaId));
 
         // Romper relaciones antes de borrar
         if (receta.getPreparaciones() != null) {
@@ -83,7 +83,7 @@ public class RecetaService {
     @Transactional
     public RecetaEntity obtenerRecetaPorId(Long recetaId) {
         return recetaRepository.findById(recetaId)
-                .orElseThrow(() -> new EntityNotFoundException("Receta no encontrada con id: " + recetaId));
+                .orElseThrow(() -> new EntityNotFoundException(ID_NO_ENCONTRADO + recetaId));
     }
 
     /**

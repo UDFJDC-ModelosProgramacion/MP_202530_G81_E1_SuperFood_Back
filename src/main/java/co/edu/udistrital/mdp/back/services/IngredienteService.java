@@ -56,10 +56,11 @@ public class IngredienteService {
      */
     @Transactional
     public IngredienteEntity modificarIngrediente(Long id, String nuevoNombre,
-                                                  boolean proteina, boolean grasa, boolean carbohidrato) {
-
-        IngredienteEntity ingrediente = ingredienteRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Ingrediente no encontrado con id: " + id));
+                                                boolean proteina, boolean grasa, boolean carbohidrato) {
+        IngredienteEntity ingrediente = ingredienteRepository.findById(id).orElse(null);
+        if (ingrediente == null) {
+            throw new EntityNotFoundException("Ingrediente no encontrado con id: " + id);
+        }
 
         // Validar nombre repetido
         List<IngredienteEntity> existentes = ingredienteRepository.findAll();
@@ -82,6 +83,7 @@ public class IngredienteService {
         log.info("Modificando ingrediente con id {}: nuevo nombre '{}'", id, nuevoNombre);
         return ingredienteRepository.save(ingrediente);
     }
+
 
     //consulta un ingrediente por nombre
     @Transactional
